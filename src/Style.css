@@ -1,0 +1,215 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+}
+
+.App {
+  display: flex;
+}
+
+/* SIDBAR STYLING */
+.sidebar {
+  background-color: #2366B5;
+  color: #fff;
+  padding: 40px 45px;
+  width: 235px;
+  height: 100vh;
+}
+.sidebar ul {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 40px;
+  transition: 0.4s ease-in-out;
+}
+.sidebar ul li {
+  display: flex;
+  margin-bottom: 32px;
+  cursor: pointer;
+  position: relative;
+  z-index: 9;
+}
+.sidebar ul li:hover:not(#log-btn) {
+  color: #2366B5;
+}
+.sidebar ul li:hover:not(#log-btn)::before {
+  position: absolute;
+  content: "";
+  background-color: #fff;
+  width: 240px;
+  height: 40px;
+  left: -50px;
+  top: -8px;
+  z-index: -9;
+}
+.sidebar ul li h3 {
+  font-size: 15px;
+  font-weight: 400;
+  margin-left: 15px;
+}
+.sidebar ul li #icon {
+  margin-top: 2.5px;
+}
+.sidebar ul li button {
+  display: flex;
+  background-color: #fff;
+  color: #2366B5;
+  border: none;
+  border-radius: 30px;
+  padding: 5px 19px;
+  cursor: pointer;
+}
+.sidebar ul li button h3 {
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+}
+.sidebar ul li button #icon {
+  margin: 4.4px -8px 0 0;
+}
+
+/* OVERVIEW */
+.overview {
+  padding: 60px 35px;
+}
+.overview h1 {
+  font-weight: 600;
+  font-size: 25px;
+  margin-bottom: 50px;
+}
+.overview .section-title {
+  font-weight: 500;
+  margin-bottom: 7px;
+}
+.overview .accounts-container .all-accounts {
+  display: flex;
+}
+.overview .accounts-container .new-account {
+  border: 1.4px solid #C4C4C4;
+  color: #535353;
+  text-align: center;
+  margin-right: 20px;
+  width: 270px;
+  height: 210px;
+  position: relative;
+  padding: 28px;
+}
+.overview .accounts-container .new-account .depositAmount {
+  font-weight: 600;
+  color: #2366B5;
+  font-size: 35px;
+  margin-top: -30px;
+  position: absolute;
+  bottom: 40px;
+  width: 100%;
+  left: 0;
+}
+.overview .accounts-container .new-account h3 {
+  font-weight: 400;
+  margin-bottom: 30px;
+}
+.overview .accounts-container .new-account #add-icon {
+  font-size: 80px;
+  color: #C4C4C4;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+.overview .accounts-container .new-account #add-icon:hover {
+  transform: scale(1.1);
+  color: #535353;
+}
+.overview hr {
+  margin: 50px 0 50px 0;
+}
+.overview .transactions .filters {
+  display: flex;
+  font-size: 14px;
+  margin-top: 15px;
+}
+.overview .transactions .filters h3 {
+  margin-right: 10px;
+}
+.overview .transactions .filters select {
+  font-family: "Poppins", sans-serif;
+  background-color: #2366B5;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 2px 10px;
+}
+.overview .transactions .filters select option {
+  background-color: gray;
+}
+
+/* NEW ACCOUNT FORM STYLING */
+.newAccount {
+  background-color: #fff;
+  padding: 30px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 300px;
+  z-index: 999;
+  box-shadow: 10px 10px 29px 0px rgba(0, 0, 0, 0.24);
+}
+.newAccount .account-input {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 17px;
+}
+.newAccount .account-input:not(.account-input:last-of-type) {
+  margin-bottom: 35px;
+}
+.newAccount .account-input:last-of-type {
+  margin-bottom: 20px;
+}
+.newAccount .account-input label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+.newAccount .account-input input {
+  width: 200px;
+  padding: 5px 10px;
+  border-radius: 3px;
+  border: 1px solid black;
+}
+.newAccount .account-input h4 {
+  position: absolute;
+  font-weight: 400;
+  font-size: 12px;
+  color: red;
+  top: 110px;
+  left: 102px;
+}
+.newAccount button {
+  background-color: #2366B5;
+  color: #fff;
+  border: none;
+  padding: 10px 30px;
+  display: flex;
+  margin: 0 auto;
+  font-family: "Poppins", sans-serif;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+.newAccount button:hover {
+  background-color: black;
+}
+.newAccount #close-btn {
+  font-size: 25px;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+}/*# sourceMappingURL=Style.css.map */

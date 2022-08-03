@@ -1,5 +1,60 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
+
+/* VARIABLES */
+$main-blue: #2366B5; 
+$hover-blue: #5085bd; 
+
+/* MIXINS */
+@mixin nav-hover {
+    color: $main-blue;
+        
+       &::before {
+        position: absolute;
+        content: '';
+        background-color: #fff;
+        width: 240px;
+        height: 40px;
+        left: -50px;
+        top: -8px;
+        z-index: -9;
+        }
+}
+
+@mixin main-btn {
+    display: flex;
+    background-color: #fff;
+    color: #2366B5;
+    border: none;
+    border-radius: 30px;
+    padding: 5px 19px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+}
+
+@mixin bank-form {
+    label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: 500;
+        text-transform: uppercase;
+    }
+    input {
+        width: 200px;
+        padding: 5px 10px;
+        border-radius: 3px;
+        border: 1px solid black;
+    }
+    h4 { // error
+        position: absolute;
+        font-weight: 400;
+        font-size: 12px;
+        color: red;
+        top: 110px;
+        left: 102px;
+    }
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -14,17 +69,13 @@ body {
     display: flex;
 }
 
-/* SIDBAR STYLING */
+/* SIDBAR / NAVIGATION STYLING */
 .sidebar {
-    background-color: #2366B5;
+    background-color: $main-blue;
     color: #fff;
     padding: 40px 45px;
     width: 235px;
     height: 100vh;
-
-    // position: absolute;
-    // top: 0;
-    // left: 0;
 
     ul {
         display: flex;
@@ -39,18 +90,17 @@ body {
            position: relative;
            z-index: 9;
 
-           &:hover:not(#log-btn) {
-            color: #2366B5;
-            
-           &::before {
-            position: absolute;
-            content: '';
-            background-color: #fff;
-            width: 240px;
-            height: 40px;
-            left: -50px;
-            top: -8px;
-            z-index: -9;
+        &:hover:not(#log-btn) {
+            @include nav-hover();
+        }
+           
+           a {
+            text-decoration: none;
+            color: #fff;
+            display: flex;
+
+            &:hover {
+                @include nav-hover();
             }
            }
 
@@ -65,13 +115,11 @@ body {
             }
 
             button {
-                display: flex;
-                background-color: #fff;
-                color: #2366B5;
-                border: none;
-                border-radius: 30px;
-                padding: 5px 19px;
-                cursor: pointer;
+                @include main-btn();
+
+                // &:hover {
+                //     transform: scale(1.1);
+                // }
 
                 h3 {
                     font-family: 'Poppins', sans-serif;
@@ -88,6 +136,11 @@ body {
     }
 }
 
+.section-title {
+    font-weight: 500;
+    margin-bottom: 7px;
+}
+
 /* OVERVIEW */
 .overview {
     padding: 60px 35px;
@@ -96,11 +149,6 @@ body {
         font-weight: 600;
         font-size: 25px;
         margin-bottom: 50px;
-    }
-
-    .section-title {
-        font-weight: 500;
-        margin-bottom: 7px;
     }
 
     .accounts-container {
@@ -122,7 +170,7 @@ body {
 
             .depositAmount {
                 font-weight: 600;
-                color: #2366B5;
+                color: $main-blue;
                 font-size: 35px;
                 margin-top: -30px;
 
@@ -167,7 +215,7 @@ body {
 
             select {
                 font-family: 'Poppins', sans-serif;
-                background-color: #2366B5;
+                background-color: $main-blue;
                 color: #fff;
                 border: none;
                 border-radius: 5px;
@@ -236,7 +284,7 @@ body {
     }
 
     button {
-        background-color: #2366B5;
+        background-color: $main-blue;
         color: #fff;
         border: none;
         padding: 10px 30px;
@@ -259,5 +307,92 @@ body {
         right: 20px;
 
         cursor: pointer;
+    }
+}
+
+/* TRANSACTIONS PAGE STYLING */
+
+.transactions-page {
+    padding: 60px 35px;
+    button {
+        @include main-btn;
+        background-color: $main-blue;
+        color: #fff;
+        font-size: 16px;
+
+        &:hover {
+            background-color: $hover-blue;
+        }
+    }
+
+    form {
+        @include bank-form;
+
+        label {
+            margin: 20px 0 4px 0;
+        }
+        
+        button {
+            margin-top: 20px;
+        }
+
+        .trans-input {
+            position: relative;
+            padding-bottom: 10px;
+            margin-bottom: -14px;
+        }
+
+        .dropdown-accounts {
+            box-shadow: 10px 10px 29px 0px rgba(0,0,0,0.20);
+
+            background-color: #fff;
+            padding: 15px;
+            position: absolute;
+            width: 200px;
+            top: 60px;
+            left: 0;
+            z-index: 999;
+            border-radius: 5px;
+            h3 {
+                font-weight: 500;
+                font-size: 16px;
+                cursor: pointer;
+                transition: 0.3s ease-in-out;
+
+                &:not(&:last-child) {
+                    margin-bottom: 10px;
+                }
+
+                &:hover {
+                    transform: translateX(10px);
+                    color: $main-blue;
+                }
+            }
+        }
+
+        .select-account {
+            display: flex;
+            position: relative;
+            cursor: pointer;     
+
+            #down-arrow {
+                position: absolute;
+                top: 5px;
+                right: 10px;
+                font-size: 15px;
+                transition: 0.8s ease-in-out;
+            }
+
+            h3 {
+                font-weight: 400;
+                border: 1px solid black;
+                width: 200px;
+                padding-left: 10px;
+                border-radius: 3px;
+                font-size: 15.5px;
+                text-transform: uppercase;
+            }
+        }
+        
     }
 }

@@ -6,10 +6,12 @@ import reportWebVitals from './reportWebVitals';
 import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 import AccountReducer from './reducers/AccountReducer';
+import TransactionReducer from './reducers/TransactionReducer';
 
 const store = configureStore({
   reducer: {
-    accounts: AccountReducer
+    accounts: AccountReducer,
+    transactions: TransactionReducer
   }
 })
 

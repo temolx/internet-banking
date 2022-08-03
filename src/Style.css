@@ -1,4 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+/* VARIABLES */
+/* MIXINS */
 * {
   margin: 0;
   padding: 0;
@@ -13,7 +15,7 @@ body {
   display: flex;
 }
 
-/* SIDBAR STYLING */
+/* SIDBAR / NAVIGATION STYLING */
 .sidebar {
   background-color: #2366B5;
   color: #fff;
@@ -47,6 +49,24 @@ body {
   top: -8px;
   z-index: -9;
 }
+.sidebar ul li a {
+  text-decoration: none;
+  color: #fff;
+  display: flex;
+}
+.sidebar ul li a:hover {
+  color: #2366B5;
+}
+.sidebar ul li a:hover::before {
+  position: absolute;
+  content: "";
+  background-color: #fff;
+  width: 240px;
+  height: 40px;
+  left: -50px;
+  top: -8px;
+  z-index: -9;
+}
 .sidebar ul li h3 {
   font-size: 15px;
   font-weight: 400;
@@ -63,6 +83,7 @@ body {
   border-radius: 30px;
   padding: 5px 19px;
   cursor: pointer;
+  transition: 0.3s ease-in-out;
 }
 .sidebar ul li button h3 {
   font-family: "Poppins", sans-serif;
@@ -73,6 +94,11 @@ body {
   margin: 4.4px -8px 0 0;
 }
 
+.section-title {
+  font-weight: 500;
+  margin-bottom: 7px;
+}
+
 /* OVERVIEW */
 .overview {
   padding: 60px 35px;
@@ -81,10 +107,6 @@ body {
   font-weight: 600;
   font-size: 25px;
   margin-bottom: 50px;
-}
-.overview .section-title {
-  font-weight: 500;
-  margin-bottom: 7px;
 }
 .overview .accounts-container .all-accounts {
   display: flex;
@@ -212,4 +234,101 @@ body {
   top: 20px;
   right: 20px;
   cursor: pointer;
+}
+
+/* TRANSACTIONS PAGE STYLING */
+.transactions-page {
+  padding: 60px 35px;
+}
+.transactions-page button {
+  display: flex;
+  background-color: #fff;
+  color: #2366B5;
+  border: none;
+  border-radius: 30px;
+  padding: 5px 19px;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+  background-color: #2366B5;
+  color: #fff;
+  font-size: 16px;
+}
+.transactions-page button:hover {
+  background-color: #5085bd;
+}
+.transactions-page form label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+.transactions-page form input {
+  width: 200px;
+  padding: 5px 10px;
+  border-radius: 3px;
+  border: 1px solid black;
+}
+.transactions-page form h4 {
+  position: absolute;
+  font-weight: 400;
+  font-size: 12px;
+  color: red;
+  top: 110px;
+  left: 102px;
+}
+.transactions-page form label {
+  margin: 20px 0 4px 0;
+}
+.transactions-page form button {
+  margin-top: 20px;
+}
+.transactions-page form .trans-input {
+  position: relative;
+  padding-bottom: 10px;
+  margin-bottom: -14px;
+}
+.transactions-page form .dropdown-accounts {
+  box-shadow: 10px 10px 29px 0px rgba(0, 0, 0, 0.2);
+  background-color: #fff;
+  padding: 15px;
+  position: absolute;
+  width: 200px;
+  top: 60px;
+  left: 0;
+  z-index: 999;
+  border-radius: 5px;
+}
+.transactions-page form .dropdown-accounts h3 {
+  font-weight: 500;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+.transactions-page form .dropdown-accounts h3:not(.transactions-page form .dropdown-accounts h3:last-child) {
+  margin-bottom: 10px;
+}
+.transactions-page form .dropdown-accounts h3:hover {
+  transform: translateX(10px);
+  color: #2366B5;
+}
+.transactions-page form .select-account {
+  display: flex;
+  position: relative;
+  cursor: pointer;
+}
+.transactions-page form .select-account #down-arrow {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  font-size: 15px;
+  transition: 0.8s ease-in-out;
+}
+.transactions-page form .select-account h3 {
+  font-weight: 400;
+  border: 1px solid black;
+  width: 200px;
+  padding-left: 10px;
+  border-radius: 3px;
+  font-size: 15.5px;
+  text-transform: uppercase;
 }/*# sourceMappingURL=Style.css.map */

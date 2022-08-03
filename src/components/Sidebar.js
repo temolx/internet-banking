@@ -5,17 +5,18 @@ import { TbArrowsUpDown } from "react-icons/tb";
 import { FiSettings } from "react-icons/fi";
 import { CgProfile } from "react-icons/cg";
 import { BiWallet, BiTransferAlt, BiCreditCard, BiLogOut } from "react-icons/bi";
+import { Link } from 'react-router-dom';
 
 function Sidebar() {
   return (
     <div className='sidebar'>
         <ul className='navigation'>
-            <li><HiOutlineClipboardList id="icon" /><h3>Overview</h3></li>
-            <li><BiWallet id="icon" /><h3>Accounts</h3></li>
-            <li><BiTransferAlt id="icon" /><h3>Transfers</h3></li>
-            <li><FiFileText id="icon" /><h3>Statements</h3></li>
-            <li><BiCreditCard id="icon" /><h3>Cards</h3></li>
-            <li><TbArrowsUpDown id="icon" /><h3>Transactions</h3></li>
+            <li><Link to='/'><HiOutlineClipboardList id="icon" /><h3>Overview</h3></Link></li>
+            <li><Link to='/'><BiWallet id="icon" /><h3>Accounts</h3></Link></li>
+            <li><Link to='/'><BiTransferAlt id="icon" /><h3>Transfers</h3></Link></li>
+            <li><Link to='/'><FiFileText id="icon" /><h3>Statements</h3></Link></li>
+            <li><Link to='/'><BiCreditCard id="icon" /><h3>Cards</h3></Link></li>
+            <li><Link to='/transactions'><TbArrowsUpDown id="icon" /><h3>Transactions</h3></Link></li>
         </ul>
 
         <ul className='settings'>

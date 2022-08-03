@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { BiDownArrow } from "react-icons/bi";
 import { useSelector, useDispatch } from 'react-redux/es/exports';
 import { transfer } from '../actions/TransactionActions';
+import { subtract } from '../actions/AccountActions';
 
 function Transactions() {
 
@@ -12,14 +13,26 @@ function Transactions() {
     const[selectedAccount, setSelectedAccount] = useState('Select Account');
     const[recepient, setRecepient] = useState('');
     const[amount, setAmount] = useState(0);
+    const[currentDeposit, setCurrentDeposit] = useState(0);
+    const[error, setError] = useState('');
+    const[confirmation, setConfirmation] = useState('');
 
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        if (selectedAccount !== 'Select Account' && recepient !== '' && amount !== 0) {
-            dispatch(transfer(selectedAccount, recepient, amount, 5)); // add date
-            // and subtract from select account
+        if (selectedAccount !== 'Select Account' && recepient !== '' && Number(amount) !== 0) {
+            dispatch(transfer(selectedAccount, recepient, Number(amount), 5, currentDeposit - Number(amount))); // add date
+            
+            // subtracting from selected account
+            dispatch(subtract(selectedAccount, Number(amount)));
+
+            setError('');
+            setConfirmation('Transaction completed.');
+        }
+        else {
+            setError('Please fill in the required fields.');
+            setConfirmation('');
         }
     }
 
@@ -37,7 +50,7 @@ function Transactions() {
 
                     {visible ? <div className="dropdown-accounts">
                         {accounts && accounts.map((account) => (
-                            <h3 key={account.name} onClick={() => setSelectedAccount(account.name)}>{ account.name }, ${ account.deposit }</h3>
+                            <h3 key={account.name} onClick={() => {setSelectedAccount(account.name); setCurrentDeposit(account.deposit)}}>{ account.name }, ${ account.deposit }</h3>
                         ))}
                     </div> : ''}
                 </div>
@@ -53,6 +66,8 @@ function Transactions() {
                 </div>
 
                 <button>Transfer</button>
+                <h4>{ error }</h4>
+                <h4>{ confirmation }</h4>
             </form>
         </div>
     </div>

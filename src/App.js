@@ -9,7 +9,7 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <Sidebar />
+        <Sidebar id="side" />
 
         <Routes>
           <Route path='/' element={<Overview />} />

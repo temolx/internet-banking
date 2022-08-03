@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { RiAddCircleLine } from "react-icons/ri";
 import NewAccount from './NewAccount';
 import { useSelector } from 'react-redux/es/hooks/useSelector';
+import TransactionTable from './TransactionTable';
 
 function Overview() {
 
@@ -45,16 +46,7 @@ function Overview() {
         <div className="transactions">
             <h3 className='section-title'>Transactions</h3>
 
-            <div className="filters">
-                <h3>Filter By</h3>
-                <select>
-                    <option value="debit">Debit</option>
-                    <option value="credit">Credit</option>
-                    <option value="transfer">Transfer</option>  
-                </select>
-            </div>
-
-
+            <TransactionTable />
         </div>
 
     </div>

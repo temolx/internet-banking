@@ -23,7 +23,7 @@ function NewAccount({ setFormVisible }) {
       setError('Name is required.');
     }
     else {
-      dispatch(addAccount(name, deposit));
+      dispatch(addAccount(name, Number(deposit)));
       setFormVisible(false);
       setError('');
     }

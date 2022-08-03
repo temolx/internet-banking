@@ -6,3 +6,13 @@ export const addAccount = (name, deposit) => {
         }
     }
 }
+
+export const subtract = (name, amount) => {
+    return {
+        type: 'SUBTRACT',
+        payload: {
+            name: name, 
+            amount: amount
+        }
+    }
+}

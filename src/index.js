@@ -7,11 +7,13 @@ import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 import AccountReducer from './reducers/AccountReducer';
 import TransactionReducer from './reducers/TransactionReducer';
+import CardReducer from './reducers/CardReducer';
 
 const store = configureStore({
   reducer: {
     accounts: AccountReducer,
-    transactions: TransactionReducer
+    transactions: TransactionReducer,
+    cards: CardReducer
   }
 })
 

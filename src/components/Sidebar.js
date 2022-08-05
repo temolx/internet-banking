@@ -15,7 +15,7 @@ function Sidebar() {
             <li><Link to='/'><BiWallet id="icon" /><h3>Accounts</h3></Link></li>
             <li><Link to='/'><BiTransferAlt id="icon" /><h3>Transfers</h3></Link></li>
             <li><Link to='/'><FiFileText id="icon" /><h3>Statements</h3></Link></li>
-            <li><Link to='/'><BiCreditCard id="icon" /><h3>Cards</h3></Link></li>
+            <li><Link to='/cards'><BiCreditCard id="icon" /><h3>Cards</h3></Link></li>
             <li><Link to='/transactions'><TbArrowsUpDown id="icon" /><h3>Transactions</h3></Link></li>
         </ul>
 

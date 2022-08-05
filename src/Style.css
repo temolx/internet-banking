@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:wght@300;700&display=swap");
 /* VARIABLES */
 /* MIXINS */
 * {
@@ -28,23 +29,26 @@ body {
   left: 0;
   z-index: 99999;
 }
-.sidebar ul {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 40px;
-  transition: 0.4s ease-in-out;
-}
-.sidebar ul li {
-  display: flex;
-  margin-bottom: 32px;
-  cursor: pointer;
-  position: relative;
-  z-index: 9;
-}
-.sidebar ul li:hover:not(#log-btn) {
+.sidebar .settings li:hover:not(#log-btn) {
   color: #2366B5;
 }
-.sidebar ul li:hover:not(#log-btn)::before {
+@-webkit-keyframes navLineAnim {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 100%;
+  }
+}
+@keyframes navLineAnim {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 100%;
+  }
+}
+.sidebar .settings li:hover:not(#log-btn)::before {
   position: absolute;
   content: "";
   background-color: #fff;
@@ -54,6 +58,30 @@ body {
   top: -8px;
   z-index: -9;
 }
+.sidebar .settings li:hover:not(#log-btn)::after {
+  position: absolute;
+  content: "";
+  background-color: rgb(29, 190, 29);
+  width: 5px;
+  height: 40px;
+  right: -45px;
+  top: -8px;
+}
+.sidebar .settings #log-btn:hover button {
+  background-color: rgb(236, 236, 236);
+}
+.sidebar ul {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 40px;
+}
+.sidebar ul li {
+  display: flex;
+  margin-bottom: 32px;
+  cursor: pointer;
+  position: relative;
+  z-index: 9;
+}
 .sidebar ul li a {
   text-decoration: none;
   color: #fff;
@@ -61,6 +89,14 @@ body {
 }
 .sidebar ul li a:hover {
   color: #2366B5;
+}
+@keyframes navLineAnim {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 100%;
+  }
 }
 .sidebar ul li a:hover::before {
   position: absolute;
@@ -71,6 +107,15 @@ body {
   left: -50px;
   top: -8px;
   z-index: -9;
+}
+.sidebar ul li a:hover::after {
+  position: absolute;
+  content: "";
+  background-color: rgb(29, 190, 29);
+  width: 5px;
+  height: 40px;
+  right: -45px;
+  top: -8px;
 }
 .sidebar ul li h3 {
   font-size: 15px;
@@ -107,6 +152,7 @@ body {
 /* OVERVIEW */
 .overview {
   padding: 60px 35px;
+  width: 100%;
 }
 .overview h1 {
   font-weight: 600;
@@ -152,27 +198,21 @@ body {
   transform: scale(1.1);
   color: #535353;
 }
-.overview hr {
+
+hr {
   margin: 50px 0 50px 0;
+  width: 100%;
 }
-.overview .transactions .filters {
+
+.transactions .filters {
   display: flex;
   font-size: 14px;
   margin-top: 15px;
 }
-.overview .transactions .filters h3 {
+.transactions .filters h3 {
   margin-right: 10px;
-}
-.overview .transactions .filters select {
-  font-family: "Poppins", sans-serif;
-  background-color: #2366B5;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  padding: 2px 10px;
-}
-.overview .transactions .filters select option {
-  background-color: gray;
+  font-weight: 500;
+  text-transform: uppercase;
 }
 
 /* NEW ACCOUNT FORM STYLING */
@@ -248,6 +288,7 @@ body {
 /* TRANSACTIONS PAGE STYLING */
 .transactions-page {
   padding: 60px 35px;
+  width: 100%;
 }
 .transactions-page button {
   display: flex;
@@ -331,6 +372,7 @@ body {
   display: flex;
   position: relative;
   cursor: pointer;
+  width: 200px;
 }
 .transactions-page form .select-account #down-arrow {
   position: absolute;
@@ -356,6 +398,7 @@ body {
   font-weight: 500;
 }
 .transaction-table table {
+  position: relative;
   margin-top: 20px;
   border-collapse: collapse;
   width: 100%;
@@ -378,4 +421,206 @@ body {
   font-weight: 600;
   padding: 7px 15px;
   border-radius: 20px;
+}
+.transaction-table .filters .filter-dropdown {
+  position: relative;
+  padding-bottom: 7px;
+}
+.transaction-table .filters .filter-dropdown .select-filter {
+  display: flex;
+  position: relative;
+  cursor: pointer;
+  width: 200px;
+  width: 120px;
+  color: #fff;
+  background-color: #2366B5;
+  border-radius: 5px;
+}
+.transaction-table .filters .filter-dropdown .select-filter #down-arrow {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  font-size: 15px;
+  transition: 0.8s ease-in-out;
+}
+.transaction-table .filters .filter-dropdown .select-filter h3 {
+  font-weight: 400;
+  border: 1px solid black;
+  width: 200px;
+  padding-left: 10px;
+  border-radius: 3px;
+  font-size: 15.5px;
+  text-transform: uppercase;
+}
+.transaction-table .filters .filter-dropdown .select-filter #down-arrow {
+  top: 3.5px;
+}
+.transaction-table .filters .filter-dropdown .select-filter h3 {
+  border: none;
+}
+.transaction-table .filters .filter-dropdown .filter-dropdown-select {
+  box-shadow: 10px 10px 29px 0px rgba(0, 0, 0, 0.2);
+  background-color: #fff;
+  padding: 15px;
+  position: absolute;
+  width: 200px;
+  top: 60px;
+  left: 0;
+  z-index: 999;
+  border-radius: 5px;
+  top: 30px;
+}
+.transaction-table .filters .filter-dropdown .filter-dropdown-select h3 {
+  font-weight: 500;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+.transaction-table .filters .filter-dropdown .filter-dropdown-select h3:not(.transaction-table .filters .filter-dropdown .filter-dropdown-select h3:last-child) {
+  margin-bottom: 10px;
+}
+.transaction-table .filters .filter-dropdown .filter-dropdown-select h3:hover {
+  transform: translateX(10px);
+  color: #2366B5;
+}
+
+/* CARDS PAGE STYLING */
+.cards {
+  padding: 60px 35px;
+  width: 100%;
+}
+.cards .new-card {
+  margin-bottom: 70px;
+}
+.cards .new-card form label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+.cards .new-card form input {
+  width: 200px;
+  padding: 5px 10px;
+  border-radius: 3px;
+  border: 1px solid black;
+}
+.cards .new-card form h4 {
+  position: absolute;
+  font-weight: 400;
+  font-size: 12px;
+  color: red;
+}
+.cards .new-card form .select-card-type, .cards .new-card form .debit-or-credit {
+  display: flex;
+  position: relative;
+  cursor: pointer;
+  width: 200px;
+}
+.cards .new-card form .select-card-type #down-arrow, .cards .new-card form .debit-or-credit #down-arrow {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  font-size: 15px;
+  transition: 0.8s ease-in-out;
+}
+.cards .new-card form .select-card-type h3, .cards .new-card form .debit-or-credit h3 {
+  font-weight: 400;
+  border: 1px solid black;
+  width: 200px;
+  padding-left: 10px;
+  border-radius: 3px;
+  font-size: 15.5px;
+  text-transform: uppercase;
+}
+.cards .new-card form .dropdown-card-types {
+  box-shadow: 10px 10px 29px 0px rgba(0, 0, 0, 0.2);
+  background-color: #fff;
+  padding: 15px;
+  position: absolute;
+  width: 200px;
+  top: 60px;
+  left: 0;
+  z-index: 999;
+  border-radius: 5px;
+}
+.cards .new-card form .dropdown-card-types h3 {
+  font-weight: 500;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+.cards .new-card form .dropdown-card-types h3:not(.cards .new-card form .dropdown-card-types h3:last-child) {
+  margin-bottom: 10px;
+}
+.cards .new-card form .dropdown-card-types h3:hover {
+  transform: translateX(10px);
+  color: #2366B5;
+}
+.cards .new-card form .card-input {
+  padding-bottom: 20px;
+  position: relative;
+}
+.cards .new-card form label {
+  margin-bottom: 5px;
+}
+.cards .new-card form button {
+  display: flex;
+  background-color: #fff;
+  color: #2366B5;
+  border: none;
+  border-radius: 30px;
+  padding: 5px 19px;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+  background-color: #2366B5;
+  color: #fff;
+  font-size: 16px;
+  width: 200px;
+  display: flex;
+  justify-content: center;
+  margin: 5px 0 5px 0;
+}
+.cards .new-card form button:hover {
+  background-color: #5085bd;
+}
+.cards .new-card form h4:last-child {
+  color: green;
+}
+.cards .card-list {
+  margin-top: 25px;
+}
+.cards .card-list .card {
+  width: 280px;
+  height: 160px;
+  position: relative;
+  padding: 15px;
+  display: flex;
+  background-color: rgb(246, 246, 101);
+  font-family: "Averia Serif Libre", cursive;
+  box-shadow: 10px 10px 29px 0px rgba(0, 0, 0, 0.15);
+  background-image: url("./img/glass.png");
+  background-size: cover;
+}
+.cards .card-list .card .left .credentials {
+  position: absolute;
+  bottom: 10px;
+}
+.cards .card-list .card .left .credentials h5 {
+  font-weight: 500;
+  font-size: 16px;
+}
+.cards .card-list .card .left .credentials h6 {
+  text-transform: uppercase;
+  font-size: 9px;
+}
+.cards .card-list .card .left .type h2 {
+  font-weight: 500;
+  font-family: "Poppins", sans-serif;
+}
+.cards .card-list .card .right #card-type {
+  position: absolute;
+  bottom: 10px;
+  right: 15px;
+  color: #2366B5;
+  font-size: 35px;
 }/*# sourceMappingURL=Style.css.map */

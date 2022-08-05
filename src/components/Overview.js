@@ -45,7 +45,6 @@ function Overview() {
 
         <div className="transactions">
             <h3 className='section-title'>Transactions</h3>
-
             <TransactionTable />
         </div>
 

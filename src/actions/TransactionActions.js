@@ -1,4 +1,4 @@
-export const transfer = (account, recepient, amount, date, after) => {
+export const transfer = (account, recepient, amount, date, after, type) => {
     return {
         type: 'TRANSFER',
         payload: {
@@ -6,7 +6,8 @@ export const transfer = (account, recepient, amount, date, after) => {
             recepient,
             amount,
             date,
-            after
+            after,
+            type
         }
     }
 }

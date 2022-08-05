@@ -3,6 +3,7 @@ import { BiDownArrow } from "react-icons/bi";
 import { useSelector, useDispatch } from 'react-redux/es/exports';
 import { transfer } from '../actions/TransactionActions';
 import { subtract } from '../actions/AccountActions';
+import TransactionTable from './TransactionTable';
 
 function Transactions() {
 
@@ -12,26 +13,50 @@ function Transactions() {
     const[visible, setVisible] = useState(false);
     const[selectedAccount, setSelectedAccount] = useState('Select Account');
     const[recepient, setRecepient] = useState('');
-    const[amount, setAmount] = useState(0);
+    const[amount, setAmount] = useState(null);
     const[currentDeposit, setCurrentDeposit] = useState(0);
-    const[error, setError] = useState('');
+    const[error, setError] = useState({
+        digitCheck: '',
+        empty: ''
+    });
     const[confirmation, setConfirmation] = useState('');
 
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        if (selectedAccount !== 'Select Account' && recepient !== '' && Number(amount) !== 0) {
-            dispatch(transfer(selectedAccount, recepient, Number(amount), 5, currentDeposit - Number(amount))); // add date
-            
-            // subtracting from selected account
-            dispatch(subtract(selectedAccount, Number(amount)));
+        if (selectedAccount !== 'Select Account' && recepient !== '' && amount !== null) {
+            if (typeof amount === 'number') {
+                dispatch(transfer(selectedAccount, recepient, amount, 5, currentDeposit - amount, "Transaction")); // add date
+                
+                // subtracting from selected account
+                dispatch(subtract(selectedAccount, Number(amount)));
 
-            setError('');
-            setConfirmation('Transaction completed.');
+                setError({
+                    digitCheck: '',
+                    empty: ''
+                });
+                setSelectedAccount('Select Account');
+                setAmount('');
+                setRecepient('');
+                setConfirmation('Transaction completed.');
+
+                setTimeout(() => {
+                    setConfirmation('');
+                }, 1500)
+            }
+            else {
+                setError({
+                    digitCheck: 'Invalid amount.',
+                    empty: ''
+                });
+            }
         }
         else {
-            setError('Please fill in the required fields.');
+            setError({
+                digitCheck: '',
+                empty: 'Please fill in the required fields.'
+            });
             setConfirmation('');
         }
     }
@@ -50,25 +75,33 @@ function Transactions() {
 
                     {visible ? <div className="dropdown-accounts">
                         {accounts && accounts.map((account) => (
-                            <h3 key={account.name} onClick={() => {setSelectedAccount(account.name); setCurrentDeposit(account.deposit)}}>{ account.name }, ${ account.deposit }</h3>
+                            <h3 key={account.name} onClick={() => {setSelectedAccount(account.name); setCurrentDeposit(account.deposit); setVisible(false)}}>{ account.name }, ${ account.deposit }</h3>
                         ))}
                     </div> : ''}
                 </div>
 
                 <div className="trans-input">
                     <label htmlFor="to">To:</label>
-                    <input type="text" name='to' onChange={(e) => setRecepient(e.target.value)} />
+                    <input type="text" name='to' onChange={(e) => setRecepient(e.target.value)} value={recepient} />
                 </div>
 
                 <div className="trans-input">
                     <label htmlFor="amount">Amount:</label>
-                    <input type="text" name='amount' onChange={(e) => setAmount(e.target.value)} />
+                    <input type="text" name='amount' onChange={(e) => setAmount(Number(e.target.value))} value={amount} />
                 </div>
 
                 <button>Transfer</button>
-                <h4>{ error }</h4>
-                <h4>{ confirmation }</h4>
+                <h4>{ error.digitCheck }</h4>
+                <h4>{ error.empty }</h4>
+                <h4 className='confirmation'>{ confirmation }</h4>
             </form>
+        </div>
+
+        <hr />
+
+        <div className="transactions">
+            <h3 className='section-title'>Transactions</h3>
+            <TransactionTable />
         </div>
     </div>
   )

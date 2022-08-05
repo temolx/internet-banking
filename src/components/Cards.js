@@ -1,53 +1,63 @@
 import React, { useState } from 'react'
-import { FaCcVisa } from "react-icons/fa";
+import { FaCcVisa, FaCcMastercard, FaWindowClose } from "react-icons/fa";
 import { BiDownArrow } from "react-icons/bi";
+import { AiFillCloseCircle } from "react-icons/ai";
 import { CardColors } from './CardColors';
-import { useDispatch } from 'react-redux/es/exports';
-import { AddCard } from '../actions/CardActions';
+import { useDispatch, useSelector } from 'react-redux/es/exports';
+import { AddCard, RemoveCard } from '../actions/CardActions';
 
 function Cards() {
 
     const dispatch = useDispatch();
+    const cards = useSelector(state => state.cards);
 
     const[visible, setVisible] = useState(false);
     const[colorsVisible, setColorsVisible] = useState(false);
     const[typesVisible, setTypesVisible] = useState(false);
 
+    const[deleteVisible, setDeleteVisible] = useState(null);
 
     // type: Visa / Mastercard
     // cardType: Credit / Debit
     const[selectedType, setSelectedType] = useState('Visa');
-    const[selectedColor, setSelectedColor] = useState('Blue');
+    const[selectedColor, setSelectedColor] = useState(0);
     const[number, setNumber] = useState(null);
     const[expirationDate, setExpirationDate] = useState('');
     const[selectedCardType, setSelectedCardType] = useState('Credit');
+    
 
-    const[errors, setErrors] = useState({
-        digitCheck: '',
-        empty: ''
-    });
+    const[error, setError] = useState();
     const[confirmation, setConfirmation] = useState('');
+
+    const colorBackgrounds = [
+        'rgba(104, 180, 255, 0.742)',
+        'rgba(255, 46, 46, 0.85)',
+        'rgba(56, 255, 46, 0.758)',
+        'rgb(255, 255, 127)',
+    ]
+
+    const handleDelete = (cardNumber) => {
+        console.log(cardNumber);
+        dispatch(RemoveCard(cardNumber));
+    }
 
 
     const handleNewCard = (e) => {
         e.preventDefault();
 
         if (number && expirationDate !== '') {
-            if (number.toString().length === 16 && typeof number === 'number') {
+            if (number.toString().length === 16 && typeof number === 'number' && !cards.some((el) => el.number === number)) {
                 dispatch(AddCard(selectedType, selectedColor, number, expirationDate, selectedCardType));
 
                 setSelectedType('Visa');
-                setSelectedColor('Blue');
+                setSelectedColor(0);
                 setNumber('');
                 setExpirationDate('');
                 setSelectedCardType('Credit')
 
 
                 setConfirmation('New card has been added.');
-                setErrors({
-                    digitCheck: '',
-                    empty: ''
-                })
+                setError('');
 
                 setTimeout(() => {
                     setConfirmation('');
@@ -55,18 +65,16 @@ function Cards() {
             }
             else {
                 // set card number error
-                setErrors({
-                    digitCheck: 'Invalid card number.',
-                    empty: ''
-                })
+                setError('Invalid card number.');
+
+                if (cards.some((el) => el.number === number)) {
+                    setError('Card already exists.');
+                }
             }
         }
         else {
             // set empty error
-            setErrors({
-                digitCheck: '',
-                empty: 'Please fill in the required fields.'
-            })
+            setError('Please fill in the required fields.');
         }
     }
 
@@ -93,13 +101,13 @@ function Cards() {
                 <div className='card-input' onMouseEnter={() => setColorsVisible(true)} onMouseLeave={() => setColorsVisible(false)}>
                     <label htmlFor="">Color:</label>
                     <div className="select-card-type">
-                        <h3>{ selectedColor }</h3>
+                        <h3>{ CardColors[selectedColor] }</h3>
                         <BiDownArrow id="down-arrow" style={!colorsVisible ? { transform: 'rotate(180deg)' } : { transform: 'rotate(0deg)' }} />
                     </div>
 
                     {colorsVisible ? <div className="dropdown-card-types">
-                        {CardColors.map((color) => (
-                            <h3 key={color} onClick={() => {setSelectedColor(color); setColorsVisible(false)}}>{ color }</h3>
+                        {CardColors.map((color, index) => (
+                            <h3 key={color} onClick={() => {setSelectedColor(index); setColorsVisible(false)}}>{ color }</h3>
                         ))}
                     </div> : ''}
                 </div>
@@ -128,35 +136,42 @@ function Cards() {
                 </div>
 
                 <button>Add Card</button>
-                <h4>{ errors.digitCheck }</h4>
-                <h4>{ errors.empty }</h4>
+                <h4>{ error }</h4>
                 <h4 className='confirmation'>{ confirmation }</h4>
             </form>
         </div>
 
+        <hr />
+
         <div className="card-list">
         <h3 className='section-title'>Cards</h3>
 
-            <div className="card">
+        <div className="card-container">
+        {cards && cards.map((card, index) => (
+            <div className="card" style={{ backgroundColor: colorBackgrounds[card.color] }} onMouseEnter={() => setDeleteVisible(index)} onMouseLeave={() => setDeleteVisible(null)}>
+                {deleteVisible === index ? <AiFillCloseCircle className="delete-card" onClick={() => handleDelete(card.number)} /> : ''}
                 <div className="left">
                     <div className="type">
-                        <h2>Mastercard</h2>
+                        <h2>{ card.cardType } Card</h2>
                     </div>
 
                     <div className="credentials">
-                        <h5>1111 1111 1111 1111</h5>
+                        <h5>{ card.number }</h5>
                         <h6>Valid Thru</h6>
-                        <h5>12/23</h5>
+                        <h5>{ card.expirationDate }</h5>
                         <h5>Lee M. Cardholder</h5>
                     </div>
                 </div>
 
                 <div className="right">
-                    <FaCcVisa id="card-type" />
+                    {card.type === "Visa" ? <FaCcVisa id="card-type" /> :
+                    <FaCcMastercard id="card-type" />}
                 </div>
+            </div>
+        ))}
         </div>
-
         </div>
+        
     </div>
   )
 }

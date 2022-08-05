@@ -589,35 +589,65 @@ hr {
 .cards .card-list {
   margin-top: 25px;
 }
-.cards .card-list .card {
+.cards .card-list .card-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+.cards .card-list .card-container .card {
+  margin: 0 18px 18px 0;
   width: 280px;
   height: 160px;
   position: relative;
   padding: 15px;
   display: flex;
-  background-color: rgb(246, 246, 101);
   font-family: "Averia Serif Libre", cursive;
   box-shadow: 10px 10px 29px 0px rgba(0, 0, 0, 0.15);
   background-image: url("./img/glass.png");
   background-size: cover;
 }
-.cards .card-list .card .left .credentials {
+@-webkit-keyframes deleteAnim {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(100%);
+  }
+}
+@keyframes deleteAnim {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(100%);
+  }
+}
+.cards .card-list .card-container .card .delete-card {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 25px;
+  color: #2366B5;
+  cursor: pointer;
+  -webkit-animation: deleteAnim 0.5s ease-in-out;
+          animation: deleteAnim 0.5s ease-in-out;
+}
+.cards .card-list .card-container .card .left .credentials {
   position: absolute;
   bottom: 10px;
 }
-.cards .card-list .card .left .credentials h5 {
+.cards .card-list .card-container .card .left .credentials h5 {
   font-weight: 500;
   font-size: 16px;
 }
-.cards .card-list .card .left .credentials h6 {
+.cards .card-list .card-container .card .left .credentials h6 {
   text-transform: uppercase;
   font-size: 9px;
 }
-.cards .card-list .card .left .type h2 {
+.cards .card-list .card-container .card .left .type h2 {
   font-weight: 500;
   font-family: "Poppins", sans-serif;
 }
-.cards .card-list .card .right #card-type {
+.cards .card-list .card-container .card .right #card-type {
   position: absolute;
   bottom: 10px;
   right: 15px;

@@ -544,18 +544,43 @@ hr {
     }
 
     .card-list {
-        margin-top: 25px;
+        margin-top: 25px;;
+
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+
         .card {
+            margin: 0 18px 18px 0;
             width: 280px;
             height: 160px;
             position: relative;
             padding: 15px;
             display: flex;
-            background-color: rgb(246, 246, 101);
+            // background-color: rgb(255, 255, 127);
             font-family: 'Averia Serif Libre', cursive;
             box-shadow: 10px 10px 29px 0px rgba(0,0,0,0.15);
             background-image: url('./img/glass.png');
             background-size: cover;
+
+            @keyframes deleteAnim {
+                0% {
+                    transform: scale(0);
+                }
+                100% {
+                    transform: scale(100%);
+                }
+            }
+
+            .delete-card {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                font-size: 25px;
+                color: $main-blue;
+                cursor: pointer;
+                animation: deleteAnim 0.5s ease-in-out;
+            }
 
             .left {
                 .credentials {
@@ -590,6 +615,7 @@ hr {
                     font-size: 35px;
                 }
             }
+        }
         }
     }
 }

@@ -335,7 +335,6 @@ hr {
 
         @include bank-form();
         h4 {
-
             top: 110px;
             left: 102px;
         }
@@ -373,6 +372,7 @@ hr {
 .transactions-page {
     padding: 60px 35px;
     width: 100%;
+    
     button {
         @include main-btn;
         background-color: $main-blue;
@@ -387,15 +387,16 @@ hr {
     form {
         @include bank-form;
 
+
         label {
-            margin: 20px 0 4px 0;
+            margin-bottom: 5px;
         }
         
         button {
-            margin-top: 30px;
             width: 200px;
             display: flex;
             justify-content: center;
+            margin: 5px 0 5px 0;
         }
 
         h4 {
@@ -408,8 +409,7 @@ hr {
 
         .trans-input {
             position: relative;
-            padding-bottom: 10px;
-            margin-bottom: -20px;
+            padding-bottom: 12px;
         }
 
         .dropdown-accounts {
@@ -508,7 +508,7 @@ hr {
             }
 
             .dropdown-card-types {
-                @include customDropdown();
+                @include customDropdown;
             }
 
             .card-input {
@@ -616,6 +616,49 @@ hr {
                 }
             }
         }
+        }
+    }
+}
+
+/* CARD TRANSFER STYLING */
+
+.transfers {
+    padding: 60px 35px;
+    width: 100%;
+
+    form {
+        @include bank-form;
+        padding-bottom: 20px;
+        .card-input-transfer {
+            padding-bottom: 11px;
+            position: relative;
+        
+            .select-card {
+                @include customSelect;
+            }
+
+            .dropdown-accounts {
+                @include customDropdown;
+            }
+        }
+
+        label {
+            margin-bottom: 5px;
+        }
+
+        button {
+            @include main-btn();
+            background-color: $main-blue;
+            color: #fff;
+            font-size: 16px;
+            width: 200px;
+            display: flex;
+            justify-content: center;
+            margin: 5px 0 5px 0;
+    
+            &:hover {
+                background-color: $hover-blue;
+            }
         }
     }
 }

@@ -325,13 +325,13 @@ hr {
   color: red;
 }
 .transactions-page form label {
-  margin: 20px 0 4px 0;
+  margin-bottom: 5px;
 }
 .transactions-page form button {
-  margin-top: 30px;
   width: 200px;
   display: flex;
   justify-content: center;
+  margin: 5px 0 5px 0;
 }
 .transactions-page form h4 {
   margin-top: 10px;
@@ -341,8 +341,7 @@ hr {
 }
 .transactions-page form .trans-input {
   position: relative;
-  padding-bottom: 10px;
-  margin-bottom: -20px;
+  padding-bottom: 12px;
 }
 .transactions-page form .dropdown-accounts {
   box-shadow: 10px 10px 29px 0px rgba(0, 0, 0, 0.2);
@@ -653,4 +652,104 @@ hr {
   right: 15px;
   color: #2366B5;
   font-size: 35px;
+}
+
+/* CARD TRANSFER STYLING */
+.transfers {
+  padding: 60px 35px;
+  width: 100%;
+}
+.transfers form {
+  padding-bottom: 20px;
+}
+.transfers form label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+.transfers form input {
+  width: 200px;
+  padding: 5px 10px;
+  border-radius: 3px;
+  border: 1px solid black;
+}
+.transfers form h4 {
+  position: absolute;
+  font-weight: 400;
+  font-size: 12px;
+  color: red;
+}
+.transfers form .card-input-transfer {
+  padding-bottom: 11px;
+  position: relative;
+}
+.transfers form .card-input-transfer .select-card {
+  display: flex;
+  position: relative;
+  cursor: pointer;
+  width: 200px;
+}
+.transfers form .card-input-transfer .select-card #down-arrow {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  font-size: 15px;
+  transition: 0.8s ease-in-out;
+}
+.transfers form .card-input-transfer .select-card h3 {
+  font-weight: 400;
+  border: 1px solid black;
+  width: 200px;
+  padding-left: 10px;
+  border-radius: 3px;
+  font-size: 15.5px;
+  text-transform: uppercase;
+}
+.transfers form .card-input-transfer .dropdown-accounts {
+  box-shadow: 10px 10px 29px 0px rgba(0, 0, 0, 0.2);
+  background-color: #fff;
+  padding: 15px;
+  position: absolute;
+  width: 200px;
+  top: 60px;
+  left: 0;
+  z-index: 999;
+  border-radius: 5px;
+}
+.transfers form .card-input-transfer .dropdown-accounts h3 {
+  font-weight: 500;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+.transfers form .card-input-transfer .dropdown-accounts h3:not(.transfers form .card-input-transfer .dropdown-accounts h3:last-child) {
+  margin-bottom: 10px;
+}
+.transfers form .card-input-transfer .dropdown-accounts h3:hover {
+  transform: translateX(10px);
+  color: #2366B5;
+}
+.transfers form label {
+  margin-bottom: 5px;
+}
+.transfers form button {
+  display: flex;
+  background-color: #fff;
+  color: #2366B5;
+  border: none;
+  border-radius: 30px;
+  padding: 5px 19px;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+  background-color: #2366B5;
+  color: #fff;
+  font-size: 16px;
+  width: 200px;
+  display: flex;
+  justify-content: center;
+  margin: 5px 0 5px 0;
+}
+.transfers form button:hover {
+  background-color: #5085bd;
 }/*# sourceMappingURL=Style.css.map */

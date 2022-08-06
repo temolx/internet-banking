@@ -13,7 +13,7 @@ function Sidebar() {
         <ul className='navigation'>
             <li><Link to='/'><HiOutlineClipboardList id="icon" /><h3>Overview</h3></Link></li>
             <li><Link to='/'><BiWallet id="icon" /><h3>Accounts</h3></Link></li>
-            <li><Link to='/'><BiTransferAlt id="icon" /><h3>Transfers</h3></Link></li>
+            <li><Link to='/transfers'><BiTransferAlt id="icon" /><h3>Transfers</h3></Link></li>
             <li><Link to='/'><FiFileText id="icon" /><h3>Statements</h3></Link></li>
             <li><Link to='/cards'><BiCreditCard id="icon" /><h3>Cards</h3></Link></li>
             <li><Link to='/transactions'><TbArrowsUpDown id="icon" /><h3>Transactions</h3></Link></li>

@@ -66,7 +66,7 @@ function Transactions() {
         <div className="send">
             <h3 className='section-title'>Transfer Funds</h3>
             <form onSubmit={(e) => handleSubmit(e)}>
-                <div className="trans-input" onMouseEnter={() => setVisible(true)} onMouseLeave={() => setVisible(false)}>
+                <div className="user-input" onMouseEnter={() => setVisible(true)} onMouseLeave={() => setVisible(false)}>
                     <label htmlFor="">From:</label>
                     <div className="select-account">
                         <h3>{ selectedAccount }</h3>
@@ -80,12 +80,12 @@ function Transactions() {
                     </div> : ''}
                 </div>
 
-                <div className="trans-input">
+                <div className="user-input">
                     <label htmlFor="to">To:</label>
                     <input type="text" name='to' onChange={(e) => setRecepient(e.target.value)} value={recepient} />
                 </div>
 
-                <div className="trans-input">
+                <div className="user-input">
                     <label htmlFor="amount">Amount:</label>
                     <input type="text" name='amount' onChange={(e) => setAmount(Number(e.target.value))} value={amount} />
                 </div>

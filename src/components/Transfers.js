@@ -23,7 +23,7 @@ function Transfers() {
         <h3 className='section-title'>Card Transfers</h3>
 
         <form onSubmit={handleCardTransfer}>
-            <div className="card-input-transfer" onMouseEnter={() => setVisible(true)} onMouseLeave={() => setVisible(false)}>
+            <div className="user-input" onMouseEnter={() => setVisible(true)} onMouseLeave={() => setVisible(false)}>
                 <label htmlFor="">From:</label>
                 <div className="select-card">
                     <h3>{ selectedCard }</h3>
@@ -36,19 +36,19 @@ function Transfers() {
                 ))}</div> : '' }
             </div>
 
-            <div className="card-input-transfer">
+            <div className="user-input">
                 <label htmlFor="to">To:</label>
                 <input type="text" name='to' onChange={(e) => setRecepient(e.target.value)} value={recepient} />
             </div>
 
-            <div className="card-input-transfer">
+            <div className="user-input">
                 <label htmlFor="amount">Amount:</label>
                 <input type="text" name='amount' onChange={(e) => setAmount(Number(e.target.value))} value={amount} />
             </div>
 
             <button>Send</button>
             <h4 className='confirmation'>{ confirmation }</h4>
-        </form>        
+        </form>      
     </div>
   )
 }

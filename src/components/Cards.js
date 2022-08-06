@@ -85,7 +85,7 @@ function Cards() {
 
         <div className="new-card">
             <form onSubmit={handleNewCard}>
-                <div className='card-input' onMouseEnter={() => setVisible(true)} onMouseLeave={() => setVisible(false)}>
+                <div className='user-input' onMouseEnter={() => setVisible(true)} onMouseLeave={() => setVisible(false)}>
                     <label htmlFor="">Card Type:</label>
                     <div className="select-card-type">
                         <h3>{ selectedType }</h3>
@@ -98,7 +98,7 @@ function Cards() {
                     </div> : ''}
                 </div>
 
-                <div className='card-input' onMouseEnter={() => setColorsVisible(true)} onMouseLeave={() => setColorsVisible(false)}>
+                <div className='user-input' onMouseEnter={() => setColorsVisible(true)} onMouseLeave={() => setColorsVisible(false)}>
                     <label htmlFor="">Color:</label>
                     <div className="select-card-type">
                         <h3>{ CardColors[selectedColor] }</h3>
@@ -112,17 +112,17 @@ function Cards() {
                     </div> : ''}
                 </div>
 
-                <div className="card-input">
+                <div className="user-input">
                     <label htmlFor="cardNumber">Card Number:</label>
                     <input type="text" name='cardNumber' value={number} onChange={(e) => setNumber(Number(e.target.value))} />
                 </div>
 
-                <div className="card-input">
+                <div className="user-input">
                     <label htmlFor="expiration">Expiration (MM/YY):</label>
                     <input type="text" name='expiration' value={expirationDate} onChange={(e) => setExpirationDate(e.target.value)} />
                 </div>
 
-                <div className='card-input' onMouseEnter={() => setTypesVisible(true)} onMouseLeave={() => setTypesVisible(false)}>
+                <div className='user-input' onMouseEnter={() => setTypesVisible(true)} onMouseLeave={() => setTypesVisible(false)}>
                     <label htmlFor="">Debit / Credit:</label>
                     <div className="debit-or-credit">
                         <h3>{ selectedCardType }</h3>

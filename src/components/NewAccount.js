@@ -46,7 +46,7 @@ function NewAccount({ setFormVisible }) {
             <input type="text" name="amount" onChange={(e) => setDeposit(e.target.value)} />
         </div>
 
-        <button onClick={(e) => AddAccount(e)}>Add</button>
+        <button onClick={(e) => AddAccount(e)}>Add Account</button>
     </form>
   )
 }

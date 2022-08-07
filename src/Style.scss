@@ -503,7 +503,7 @@ hr {
         form {
             @include bank-form;
 
-            .select-card-type, .debit-or-credit {
+            .select-card-type, .debit-or-credit, .connect-account {
                 @include customSelect;
             }
 

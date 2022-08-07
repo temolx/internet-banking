@@ -7,6 +7,15 @@ export const addAccount = (name, deposit) => {
     }
 }
 
+export const connectCard = (accountName, cardNumber) => {
+    return {
+        type: 'CONNECT_CARD',
+        payload: {
+            accountName, cardNumber
+        }
+    }
+}
+
 export const subtract = (name, amount) => {
     return {
         type: 'SUBTRACT',

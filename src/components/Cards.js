@@ -10,10 +10,12 @@ function Cards() {
 
     const dispatch = useDispatch();
     const cards = useSelector(state => state.cards);
+    const accounts = useSelector(state => state.accounts);
 
     const[visible, setVisible] = useState(false);
     const[colorsVisible, setColorsVisible] = useState(false);
     const[typesVisible, setTypesVisible] = useState(false);
+    const[accountsVisible, setAccountsVisible] = useState(false);
 
     const[deleteVisible, setDeleteVisible] = useState(null);
 
@@ -24,6 +26,7 @@ function Cards() {
     const[number, setNumber] = useState(null);
     const[expirationDate, setExpirationDate] = useState('');
     const[selectedCardType, setSelectedCardType] = useState('Credit');
+    const[selectedAccount, setSelectedAccount] = useState('Select Account');
     
 
     const[error, setError] = useState();
@@ -45,15 +48,16 @@ function Cards() {
     const handleNewCard = (e) => {
         e.preventDefault();
 
-        if (number && expirationDate !== '') {
+        if (number && expirationDate !== '' && selectedAccount !== 'Select Account') {
             if (number.toString().length === 16 && typeof number === 'number' && !cards.some((el) => el.number === number)) {
-                dispatch(AddCard(selectedType, selectedColor, number, expirationDate, selectedCardType));
+                dispatch(AddCard(selectedType, selectedColor, number, expirationDate, selectedCardType, selectedAccount));
 
                 setSelectedType('Visa');
                 setSelectedColor(0);
                 setNumber('');
                 setExpirationDate('');
-                setSelectedCardType('Credit')
+                setSelectedCardType('Credit');
+                setSelectedAccount('Select Account');
 
 
                 setConfirmation('New card has been added.');
@@ -132,6 +136,20 @@ function Cards() {
                     {typesVisible ? <div className="dropdown-card-types">
                         <h3 onClick={() => {setSelectedCardType('Credit'); setTypesVisible(false)}}>Credit</h3>
                         <h3 onClick={() => {setSelectedCardType('Debit'); setTypesVisible(false)}}>Debit</h3>
+                    </div> : ''}
+                </div>
+
+                <div className='user-input' onMouseEnter={() => setAccountsVisible(true)} onMouseLeave={() => setAccountsVisible(false)}>
+                    <label htmlFor="">Connect to:</label>
+                    <div className="connect-account">
+                        <h3>{ selectedAccount }</h3>
+                        <BiDownArrow id="down-arrow" style={!accountsVisible ? { transform: 'rotate(180deg)' } : { transform: 'rotate(0deg)' }} />
+                    </div>
+
+                    {accountsVisible ? <div className="dropdown-card-types">
+                        {accounts.map((account) => (
+                            <h3 onClick={() => {setSelectedAccount(account.name); setAccountsVisible(false)}}>{ account.name }, ${ account.deposit }</h3>
+                        ))}
                     </div> : ''}
                 </div>
 

@@ -1,4 +1,4 @@
-export const AddCard = (type, color, number, expirationDate, cardType) => {
+export const AddCard = (type, color, number, expirationDate, cardType, account) => {
     return {
         type: 'ADD_CARD',
         payload: {
@@ -6,7 +6,8 @@ export const AddCard = (type, color, number, expirationDate, cardType) => {
             color,
             number,
             expirationDate,
-            cardType
+            cardType,
+            account
         }
     }
 }

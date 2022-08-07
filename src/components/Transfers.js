@@ -8,14 +8,38 @@ function Transfers() {
 
     const[visible, setVisible] = useState(false);
     const[recepient, setRecepient] = useState('');
-    const[amount, setAmount] = useState('');
+    const[amount, setAmount] = useState(null);
 
     const[selectedCard, setSelectedCard] = useState('Select Card');
 
     const[confirmation, setConfirmation] = useState('');
+    const[error, setError] = useState('');
 
-    const handleCardTransfer = () => {
-        
+    const handleCardTransfer = (e) => {
+        e.preventDefault();
+
+        if (amount !== null && recepient !== '' && selectedCard !== 'Select Card') {
+            if (typeof amount === 'number') {
+            // dispatch
+
+            // clear errors and stuff
+            setError('');
+            setRecepient('');
+            setAmount('');
+            setSelectedCard('Select Card');
+            setConfirmation('Transfer completed');
+
+            setTimeout(() => {
+                setConfirmation('');
+            }, 1500)
+            }
+            else {
+                setError('Invalid amount.');
+            }
+        }
+        else {
+            setError('Please fill in the required fields.');
+        }
     }
 
   return (
@@ -32,7 +56,7 @@ function Transfers() {
 
                 { visible ? <div className="dropdown-accounts">
                         {cards && cards.map((card) => (
-                            <h3 key={card.number} onClick={() => {setSelectedCard(card.number); setVisible(false)}}>{ card.number }</h3>
+                            <h3 key={card.number} onClick={() => {setSelectedCard(card.number); setVisible(false)}}>{ card.cardType + ', ' + String(card.number).slice(12) }</h3>
                 ))}</div> : '' }
             </div>
 
@@ -47,6 +71,7 @@ function Transfers() {
             </div>
 
             <button>Send</button>
+            <h4>{ error }</h4>
             <h4 className='confirmation'>{ confirmation }</h4>
         </form>      
     </div>

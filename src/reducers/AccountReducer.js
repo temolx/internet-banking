@@ -13,6 +13,13 @@ const AccountReducer = (state = [], action) => {
                 }
                 return el;
             })
+        case 'CONNECT_CARD':
+            return state.map((el) => {
+                if (el.name === action.payload.accountName) {
+                    return {...el, cards: [...el.cards, action.payload.cardNumber]}
+                }
+                return el;
+            })
         default:
             return state;
     }

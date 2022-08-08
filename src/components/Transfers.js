@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { BiDownArrow } from "react-icons/bi";
 import { useSelector, useDispatch } from 'react-redux/es/exports';
 import { subtract } from '../actions/AccountActions';
-import { subtractFromCard } from '../actions/CardActions';
+import { subtractFromCard, accumulateDebt } from '../actions/CardActions';
 
 function Transfers() {
 
@@ -15,7 +15,8 @@ function Transfers() {
 
     const[selectedCard, setSelectedCard] = useState({
         name: 'Select Card',
-        number: 0
+        number: 0,
+        type: ''
     });
 
     const[confirmation, setConfirmation] = useState('');
@@ -25,10 +26,12 @@ function Transfers() {
         e.preventDefault();
 
         if (amount !== null && recepient !== '' && selectedCard.name !== 'Select Card') {
-            if (typeof amount === 'number') {
             // dispatch
-            dispatch(subtract(selectedCard.name, amount));
-            dispatch(subtractFromCard(selectedCard.number, amount));
+            if (selectedCard.type === 'Debit') { // DEBIT
+                dispatch(subtractFromCard(selectedCard.number, amount));
+                dispatch(subtract(selectedCard.name, amount));
+            } 
+            else dispatch(accumulateDebt(selectedCard.number, amount));
 
             // clear errors and stuff
             setError('');
@@ -36,7 +39,8 @@ function Transfers() {
             setAmount('');
             setSelectedCard({
                 name: 'Select Card',
-                number: 0
+                number: 0,
+                type: ''
             });
             setConfirmation('Transfer completed');
 
@@ -44,10 +48,6 @@ function Transfers() {
                 setConfirmation('');
             }, 1500)
             }
-            else {
-                setError('Invalid amount.');
-            }
-        }
         else {
             setError('Please fill in the required fields.');
         }
@@ -68,8 +68,9 @@ function Transfers() {
                 { visible ? <div className="dropdown-accounts">
                         {cards && cards.map((card) => (
                             <h3 key={card.number} onClick={() => {setSelectedCard({
-                                name: card.accountName,
-                                number: card.number
+                                name: card.cardType === 'Debit' ? card.accountName : `...${String(card.number).slice(12)}, CREDIT CARD`,
+                                number: card.number,
+                                type: card.cardType
                             }); setVisible(false)}}>{ card.cardType + ', ' + String(card.number).slice(12) }</h3>
                 ))}</div> : '' }
             </div>

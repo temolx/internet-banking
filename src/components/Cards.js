@@ -4,7 +4,7 @@ import { BiDownArrow } from "react-icons/bi";
 import { AiFillCloseCircle } from "react-icons/ai";
 import { CardColors } from './CardColors';
 import { useDispatch, useSelector } from 'react-redux/es/exports';
-import { AddCard, RemoveCard } from '../actions/CardActions';
+import { AddCard, AddCreditCard, RemoveCard } from '../actions/CardActions';
 
 function Cards() {
 
@@ -51,10 +51,22 @@ function Cards() {
     const handleNewCard = (e) => {
         e.preventDefault();
 
-        if (number && expirationDate !== '' && selectedAccount.name !== 'Select Account') {
+        if (number && expirationDate !== '') {
             if (number.toString().length === 16 && typeof number === 'number' && !
             cards.some((el) => el.number === number)) {
-                dispatch(AddCard(selectedType, selectedColor, number, expirationDate, selectedCardType, selectedAccount.name, selectedAccount.deposit));
+                
+                if (selectedCardType === 'Credit') {
+                    // ADD CREDIT CARD
+                    dispatch(AddCreditCard(selectedType, selectedColor, number, expirationDate, selectedCardType, 0));
+                }
+                else if (selectedCardType === 'Debit' && selectedAccount.name !== 'Select Account') {
+                    // ADD DEBIT CARD
+                    dispatch(AddCard(selectedType, selectedColor, number, expirationDate, selectedCardType, selectedAccount.name, selectedAccount.deposit));
+                }
+                else {
+                    setError('Please fill in the required fields.')
+                    return
+                };
 
                 setSelectedType('Visa');
                 setSelectedColor(0);

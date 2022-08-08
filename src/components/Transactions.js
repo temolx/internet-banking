@@ -26,7 +26,6 @@ function Transactions() {
         e.preventDefault();
 
         if (selectedAccount !== 'Select Account' && recepient !== '' && amount !== null) {
-            if (typeof amount === 'number') {
                 dispatch(transfer(selectedAccount, recepient, amount, 5, currentDeposit - amount, "Transaction")); // add date
                 
                 // subtracting from selected account
@@ -44,13 +43,6 @@ function Transactions() {
                 setTimeout(() => {
                     setConfirmation('');
                 }, 1500)
-            }
-            else {
-                setError({
-                    digitCheck: 'Invalid amount.',
-                    empty: ''
-                });
-            }
         }
         else {
             setError({

@@ -26,7 +26,10 @@ function Cards() {
     const[number, setNumber] = useState(null);
     const[expirationDate, setExpirationDate] = useState('');
     const[selectedCardType, setSelectedCardType] = useState('Credit');
-    const[selectedAccount, setSelectedAccount] = useState('Select Account');
+    const[selectedAccount, setSelectedAccount] = useState({
+        name: 'Select Account',
+        deposit: 0
+    });
     
 
     const[error, setError] = useState();
@@ -40,7 +43,7 @@ function Cards() {
     ]
 
     const handleDelete = (cardNumber) => {
-        console.log(cardNumber);
+        // console.log(cardNumber);
         dispatch(RemoveCard(cardNumber));
     }
 
@@ -48,16 +51,20 @@ function Cards() {
     const handleNewCard = (e) => {
         e.preventDefault();
 
-        if (number && expirationDate !== '' && selectedAccount !== 'Select Account') {
-            if (number.toString().length === 16 && typeof number === 'number' && !cards.some((el) => el.number === number)) {
-                dispatch(AddCard(selectedType, selectedColor, number, expirationDate, selectedCardType, selectedAccount));
+        if (number && expirationDate !== '' && selectedAccount.name !== 'Select Account') {
+            if (number.toString().length === 16 && typeof number === 'number' && !
+            cards.some((el) => el.number === number)) {
+                dispatch(AddCard(selectedType, selectedColor, number, expirationDate, selectedCardType, selectedAccount.name, selectedAccount.deposit));
 
                 setSelectedType('Visa');
                 setSelectedColor(0);
                 setNumber('');
                 setExpirationDate('');
                 setSelectedCardType('Credit');
-                setSelectedAccount('Select Account');
+                setSelectedAccount({
+                    name: 'Select Account',
+                    deposit: 0
+                });
 
 
                 setConfirmation('New card has been added.');
@@ -139,19 +146,22 @@ function Cards() {
                     </div> : ''}
                 </div>
 
-                <div className='user-input' onMouseEnter={() => setAccountsVisible(true)} onMouseLeave={() => setAccountsVisible(false)}>
+                {selectedCardType === 'Debit' ? <div className='user-input' onMouseEnter={() => setAccountsVisible(true)} onMouseLeave={() => setAccountsVisible(false)}>
                     <label htmlFor="">Connect to:</label>
                     <div className="connect-account">
-                        <h3>{ selectedAccount }</h3>
+                        <h3>{ selectedAccount.name }</h3>
                         <BiDownArrow id="down-arrow" style={!accountsVisible ? { transform: 'rotate(180deg)' } : { transform: 'rotate(0deg)' }} />
                     </div>
 
                     {accountsVisible ? <div className="dropdown-card-types">
                         {accounts.map((account) => (
-                            <h3 onClick={() => {setSelectedAccount(account.name); setAccountsVisible(false)}}>{ account.name }, ${ account.deposit }</h3>
+                            <h3 onClick={() => {setSelectedAccount({
+                                name: account.name,
+                                deposit: account.deposit
+                            }); setAccountsVisible(false)}}>{ account.name }, ${ account.deposit }</h3>
                         ))}
                     </div> : ''}
-                </div>
+                </div> : '' }
 
                 <button>Add Card</button>
                 <h4>{ error }</h4>

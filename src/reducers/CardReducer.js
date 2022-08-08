@@ -6,6 +6,16 @@ const CardReducer = (state = [], action) => {
             return state.filter((el) => {
                 return el.number !== action.payload;
             })
+        case 'SUBTRACT_FROM_CARD':
+            return state.map((el) => {
+                if (el.number === action.payload.number) {
+                    return {
+                        ...el,
+                        accountDeposit: el.accountDeposit - action.payload.amount
+                    }
+                }
+                return el;
+            })
         default:
             return state;
     }

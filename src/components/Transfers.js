@@ -1,16 +1,22 @@
 import React, { useState } from 'react'
 import { BiDownArrow } from "react-icons/bi";
 import { useSelector, useDispatch } from 'react-redux/es/exports';
+import { subtract } from '../actions/AccountActions';
+import { subtractFromCard } from '../actions/CardActions';
 
 function Transfers() {
 
+    const dispatch = useDispatch();
     const cards = useSelector(state => state.cards);
 
     const[visible, setVisible] = useState(false);
     const[recepient, setRecepient] = useState('');
     const[amount, setAmount] = useState(null);
 
-    const[selectedCard, setSelectedCard] = useState('Select Card');
+    const[selectedCard, setSelectedCard] = useState({
+        name: 'Select Card',
+        number: 0
+    });
 
     const[confirmation, setConfirmation] = useState('');
     const[error, setError] = useState('');
@@ -18,15 +24,20 @@ function Transfers() {
     const handleCardTransfer = (e) => {
         e.preventDefault();
 
-        if (amount !== null && recepient !== '' && selectedCard !== 'Select Card') {
+        if (amount !== null && recepient !== '' && selectedCard.name !== 'Select Card') {
             if (typeof amount === 'number') {
             // dispatch
+            dispatch(subtract(selectedCard.name, amount));
+            dispatch(subtractFromCard(selectedCard.number, amount));
 
             // clear errors and stuff
             setError('');
             setRecepient('');
             setAmount('');
-            setSelectedCard('Select Card');
+            setSelectedCard({
+                name: 'Select Card',
+                number: 0
+            });
             setConfirmation('Transfer completed');
 
             setTimeout(() => {
@@ -50,13 +61,16 @@ function Transfers() {
             <div className="user-input" onMouseEnter={() => setVisible(true)} onMouseLeave={() => setVisible(false)}>
                 <label htmlFor="">From:</label>
                 <div className="select-card">
-                    <h3>{ selectedCard }</h3>
+                    <h3>{ selectedCard.name }</h3>
                     <BiDownArrow id="down-arrow" style={!visible ? { transform: 'rotate(180deg)' } : { transform: 'rotate(0deg)' }} />
                 </div>
 
                 { visible ? <div className="dropdown-accounts">
                         {cards && cards.map((card) => (
-                            <h3 key={card.number} onClick={() => {setSelectedCard(card.number); setVisible(false)}}>{ card.cardType + ', ' + String(card.number).slice(12) }</h3>
+                            <h3 key={card.number} onClick={() => {setSelectedCard({
+                                name: card.accountName,
+                                number: card.number
+                            }); setVisible(false)}}>{ card.cardType + ', ' + String(card.number).slice(12) }</h3>
                 ))}</div> : '' }
             </div>
 

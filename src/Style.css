@@ -29,7 +29,7 @@ body {
 
 /* SIDBAR / NAVIGATION STYLING */
 .sidebar {
-  background-color: #2366B5;
+  background-color: #2366b5;
   color: #fff;
   padding: 40px 45px;
   width: 235px;
@@ -40,7 +40,7 @@ body {
   z-index: 99999;
 }
 .sidebar .settings li:hover:not(#log-btn) {
-  color: #2366B5;
+  color: #2366b5;
 }
 @-webkit-keyframes navLineAnim {
   0% {
@@ -98,7 +98,7 @@ body {
   display: flex;
 }
 .sidebar ul li a:hover {
-  color: #2366B5;
+  color: #2366b5;
 }
 @keyframes navLineAnim {
   0% {
@@ -127,6 +127,36 @@ body {
   right: -45px;
   top: -8px;
 }
+.sidebar ul li #active {
+  color: #2366b5;
+}
+@keyframes navLineAnim {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 100%;
+  }
+}
+.sidebar ul li #active::before {
+  position: absolute;
+  content: "";
+  background-color: #fff;
+  width: 240px;
+  height: 40px;
+  left: -50px;
+  top: -8px;
+  z-index: -9;
+}
+.sidebar ul li #active::after {
+  position: absolute;
+  content: "";
+  background-color: rgb(29, 190, 29);
+  width: 5px;
+  height: 40px;
+  right: -45px;
+  top: -8px;
+}
 .sidebar ul li h3 {
   font-size: 15px;
   font-weight: 400;
@@ -138,7 +168,7 @@ body {
 .sidebar ul li button {
   display: flex;
   background-color: #fff;
-  color: #2366B5;
+  color: #2366b5;
   border: none;
   border-radius: 30px;
   padding: 5px 19px;
@@ -175,7 +205,7 @@ body {
   flex-wrap: wrap;
 }
 .overview .accounts-container .new-account {
-  border: 1.4px solid #C4C4C4;
+  border: 1.4px solid #c4c4c4;
   color: #535353;
   text-align: center;
   margin-right: 20px;
@@ -187,7 +217,7 @@ body {
 }
 .overview .accounts-container .new-account .depositAmount {
   font-weight: 600;
-  color: #2366B5;
+  color: #2366b5;
   font-size: 35px;
   margin-top: -30px;
   position: absolute;
@@ -201,7 +231,7 @@ body {
 }
 .overview .accounts-container .new-account #add-icon {
   font-size: 80px;
-  color: #C4C4C4;
+  color: #c4c4c4;
   cursor: pointer;
   transition: 0.3s ease-in-out;
 }
@@ -273,14 +303,14 @@ hr {
 .newAccount .account-input button {
   display: flex;
   background-color: #fff;
-  color: #2366B5;
+  color: #2366b5;
   border: none;
   border-radius: 30px;
   padding: 5px 19px;
   cursor: pointer;
   font-family: "Poppins", sans-serif;
   transition: 0.3s ease-in-out;
-  background-color: #2366B5;
+  background-color: #2366b5;
   color: #fff;
   font-size: 16px;
   width: 200px;
@@ -305,14 +335,14 @@ hr {
 .newAccount button {
   display: flex;
   background-color: #fff;
-  color: #2366B5;
+  color: #2366b5;
   border: none;
   border-radius: 30px;
   padding: 5px 19px;
   cursor: pointer;
   font-family: "Poppins", sans-serif;
   transition: 0.3s ease-in-out;
-  background-color: #2366B5;
+  background-color: #2366b5;
   color: #fff;
   font-size: 15px;
   width: 200px;
@@ -365,14 +395,14 @@ hr {
 .transactions-page form button {
   display: flex;
   background-color: #fff;
-  color: #2366B5;
+  color: #2366b5;
   border: none;
   border-radius: 30px;
   padding: 5px 19px;
   cursor: pointer;
   font-family: "Poppins", sans-serif;
   transition: 0.3s ease-in-out;
-  background-color: #2366B5;
+  background-color: #2366b5;
   color: #fff;
   font-size: 16px;
   width: 200px;
@@ -409,7 +439,7 @@ hr {
 }
 .transactions-page form .dropdown-accounts h3:hover {
   transform: translateX(10px);
-  color: #2366B5;
+  color: #2366b5;
 }
 .transactions-page form .select-account {
   display: flex;
@@ -437,7 +467,7 @@ hr {
 /* TRANSACTION TABLE STYLING */
 .transaction-table .table-titles {
   color: #fff;
-  background-color: #2366B5;
+  background-color: #2366b5;
   font-weight: 500;
 }
 .transaction-table table {
@@ -453,17 +483,31 @@ hr {
 }
 .transaction-table table #table-content td {
   padding: 30px 35px;
+  position: relative;
 }
 .transaction-table table #table-content td:last-child {
   font-weight: 600;
 }
-.transaction-table table #transaction-type span {
-  color: #2366B5;
-  background-color: rgba(35, 103, 181, 0.1921568627);
-  font-size: 12px;
+.transaction-table table span {
+  font-size: 13px;
   font-weight: 600;
-  padding: 7px 15px;
-  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  border-radius: 12px;
+  padding: 3px;
+  width: 100px;
+}
+.transaction-table table #type-transaction span {
+  color: #2366b5;
+  background-color: rgba(35, 103, 181, 0.1921568627);
+}
+.transaction-table table #type-transfer-debit span {
+  color: #d0021b;
+  background-color: rgba(208, 2, 26, 0.3019607843);
+}
+.transaction-table table #type-transfer-credit span {
+  color: #0a9707;
+  background-color: rgba(9, 151, 7, 0.2705882353);
 }
 .transaction-table .filters .filter-dropdown {
   position: relative;
@@ -474,9 +518,9 @@ hr {
   position: relative;
   cursor: pointer;
   width: 200px;
-  width: 120px;
+  width: 150px;
   color: #fff;
-  background-color: #2366B5;
+  background-color: #2366b5;
   border-radius: 5px;
 }
 .transaction-table .filters .filter-dropdown .select-filter #down-arrow {
@@ -524,7 +568,7 @@ hr {
 }
 .transaction-table .filters .filter-dropdown .filter-dropdown-select h3:hover {
   transform: translateX(10px);
-  color: #2366B5;
+  color: #2366b5;
 }
 
 /* CARDS PAGE STYLING */
@@ -563,14 +607,14 @@ hr {
 .cards .new-card form button {
   display: flex;
   background-color: #fff;
-  color: #2366B5;
+  color: #2366b5;
   border: none;
   border-radius: 30px;
   padding: 5px 19px;
   cursor: pointer;
   font-family: "Poppins", sans-serif;
   transition: 0.3s ease-in-out;
-  background-color: #2366B5;
+  background-color: #2366b5;
   color: #fff;
   font-size: 16px;
   width: 200px;
@@ -585,20 +629,26 @@ hr {
   position: relative;
   padding-bottom: 20px;
 }
-.cards .new-card form .select-card-type, .cards .new-card form .debit-or-credit, .cards .new-card form .connect-account {
+.cards .new-card form .select-card-type,
+.cards .new-card form .debit-or-credit,
+.cards .new-card form .connect-account {
   display: flex;
   position: relative;
   cursor: pointer;
   width: 200px;
 }
-.cards .new-card form .select-card-type #down-arrow, .cards .new-card form .debit-or-credit #down-arrow, .cards .new-card form .connect-account #down-arrow {
+.cards .new-card form .select-card-type #down-arrow,
+.cards .new-card form .debit-or-credit #down-arrow,
+.cards .new-card form .connect-account #down-arrow {
   position: absolute;
   top: 5px;
   right: 10px;
   font-size: 15px;
   transition: 0.8s ease-in-out;
 }
-.cards .new-card form .select-card-type h3, .cards .new-card form .debit-or-credit h3, .cards .new-card form .connect-account h3 {
+.cards .new-card form .select-card-type h3,
+.cards .new-card form .debit-or-credit h3,
+.cards .new-card form .connect-account h3 {
   font-weight: 400;
   border: 1px solid black;
   width: 200px;
@@ -629,7 +679,7 @@ hr {
 }
 .cards .new-card form .dropdown-card-types h3:hover {
   transform: translateX(10px);
-  color: #2366B5;
+  color: #2366b5;
 }
 .cards .card-list {
   margin-top: 25px;
@@ -671,7 +721,7 @@ hr {
   top: 10px;
   right: 10px;
   font-size: 25px;
-  color: #2366B5;
+  color: #2366b5;
   cursor: pointer;
   -webkit-animation: deleteAnim 0.5s ease-in-out;
           animation: deleteAnim 0.5s ease-in-out;
@@ -696,7 +746,7 @@ hr {
   position: absolute;
   bottom: 10px;
   right: 15px;
-  color: #2366B5;
+  color: #2366b5;
   font-size: 35px;
 }
 
@@ -733,14 +783,14 @@ hr {
 .transfers form button {
   display: flex;
   background-color: #fff;
-  color: #2366B5;
+  color: #2366b5;
   border: none;
   border-radius: 30px;
   padding: 5px 19px;
   cursor: pointer;
   font-family: "Poppins", sans-serif;
   transition: 0.3s ease-in-out;
-  background-color: #2366B5;
+  background-color: #2366b5;
   color: #fff;
   font-size: 16px;
   width: 200px;
@@ -799,5 +849,5 @@ hr {
 }
 .transfers form .dropdown-accounts h3:hover {
   transform: translateX(10px);
-  color: #2366B5;
+  color: #2366b5;
 }/*# sourceMappingURL=Style.css.map */

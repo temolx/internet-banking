@@ -1,609 +1,632 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:wght@300;700&display=swap');
-
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:wght@300;700&display=swap");
 
 /* VARIABLES */
-$main-blue: #2366B5; 
-$hover-blue: #5085bd; 
+$main-blue: #2366b5;
+$hover-blue: #5085bd;
 
 /* MIXINS */
 @mixin nav-hover {
-    color: $main-blue;
-    
+  color: $main-blue;
 
-    @keyframes navLineAnim {
-        0% {
-            opacity: 0;
-        }
-        100% {
-            opacity: 100%;
-        }
+  @keyframes navLineAnim {
+    0% {
+      opacity: 0;
     }
-        
-       &::before {
-        position: absolute;
-        content: '';
-        background-color: #fff;
-        width: 240px;
-        height: 40px;
-        left: -50px;
-        top: -8px;
-        z-index: -9;
-        // animation: navLineAnim 0.3s ease-in-out;
-        }
-        &::after {
-            position: absolute;
-            content: '';
-            background-color: rgb(29, 190, 29);
-            width: 5px;
-            height: 40px;
-            right: -45px;
-            top: -8px;
-        }
+    100% {
+      opacity: 100%;
+    }
+  }
+
+  &::before {
+    position: absolute;
+    content: "";
+    background-color: #fff;
+    width: 240px;
+    height: 40px;
+    left: -50px;
+    top: -8px;
+    z-index: -9;
+    // animation: navLineAnim 0.3s ease-in-out;
+  }
+  &::after {
+    position: absolute;
+    content: "";
+    background-color: rgb(29, 190, 29);
+    width: 5px;
+    height: 40px;
+    right: -45px;
+    top: -8px;
+  }
 }
 
 @mixin main-btn {
-    display: flex;
-    background-color: #fff;
-    color: #2366B5;
-    border: none;
-    border-radius: 30px;
-    padding: 5px 19px;
-    cursor: pointer;
-    font-family: 'Poppins', sans-serif;
-    transition: 0.3s ease-in-out;
+  display: flex;
+  background-color: #fff;
+  color: #2366b5;
+  border: none;
+  border-radius: 30px;
+  padding: 5px 19px;
+  cursor: pointer;
+  font-family: "Poppins", sans-serif;
+  transition: 0.3s ease-in-out;
 }
 
 @mixin bank-form {
+  padding-bottom: 20px;
+
+  label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+  }
+  input {
+    width: 200px;
+    padding: 5px 10px;
+    border-radius: 3px;
+    border: 1px solid black;
+  }
+  h4 {
+    // error
+    position: absolute;
+    font-weight: 400;
+    font-size: 12px;
+    color: red;
+
+    &:last-child {
+      color: green;
+    }
+  }
+
+  button {
+    @include main-btn;
+    background-color: $main-blue;
+    color: #fff;
+    font-size: 16px;
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    margin: 5px 0 5px 0;
+
+    &:hover {
+      background-color: $hover-blue;
+    }
+  }
+
+  .user-input {
+    position: relative;
     padding-bottom: 20px;
-
-    label {
-        display: block;
-        margin-bottom: 10px;
-        font-weight: 500;
-        text-transform: uppercase;
-        margin-bottom: 5px;
-    }
-    input {
-        width: 200px;
-        padding: 5px 10px;
-        border-radius: 3px;
-        border: 1px solid black;
-    }
-    h4 { // error
-        position: absolute;
-        font-weight: 400;
-        font-size: 12px;
-        color: red;
-
-            &:last-child {
-                color: green;
-            }
-    }
-
-    button {
-        @include main-btn;
-        background-color: $main-blue;
-        color: #fff;
-        font-size: 16px;
-        width: 200px;
-        display: flex;
-        justify-content: center;
-        margin: 5px 0 5px 0;
-
-        &:hover {
-            background-color: $hover-blue;
-        }
-    }
-
-    .user-input {
-        position: relative;
-        padding-bottom: 20px;
-    }
+  }
 }
 
 @mixin customSelect {
-    display: flex;
-    position: relative;
-    cursor: pointer;  
+  display: flex;
+  position: relative;
+  cursor: pointer;
+  width: 200px;
+
+  #down-arrow {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    font-size: 15px;
+    transition: 0.8s ease-in-out;
+  }
+
+  h3 {
+    font-weight: 400;
+    border: 1px solid black;
     width: 200px;
-
-    #down-arrow {
-        position: absolute;
-        top: 5px;
-        right: 10px;
-        font-size: 15px;
-        transition: 0.8s ease-in-out;
-    }
-
-    h3 {
-        font-weight: 400;
-        border: 1px solid black;
-        width: 200px;
-        padding-left: 10px;
-        border-radius: 3px;
-        font-size: 15.5px;
-        text-transform: uppercase;
-    }
+    padding-left: 10px;
+    border-radius: 3px;
+    font-size: 15.5px;
+    text-transform: uppercase;
+  }
 }
 
 @mixin customDropdown {
-    box-shadow: 10px 10px 29px 0px rgba(0,0,0,0.20);
+  box-shadow: 10px 10px 29px 0px rgba(0, 0, 0, 0.2);
 
-    background-color: #fff;
-    padding: 15px;
-    position: absolute;
-    width: 200px;
-    top: 60px;
-    left: 0;
-    z-index: 999;
-    border-radius: 5px;
-    h3 {
-        font-weight: 500;
-        font-size: 16px;
-        cursor: pointer;
-        transition: 0.3s ease-in-out;
+  background-color: #fff;
+  padding: 15px;
+  position: absolute;
+  width: 200px;
+  top: 60px;
+  left: 0;
+  z-index: 999;
+  border-radius: 5px;
+  h3 {
+    font-weight: 500;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
 
-        &:not(&:last-child) {
-            margin-bottom: 10px;
-        }
-
-        &:hover {
-            transform: translateX(10px);
-            color: $main-blue;
-        }
+    &:not(&:last-child) {
+      margin-bottom: 10px;
     }
+
+    &:hover {
+      transform: translateX(10px);
+      color: $main-blue;
+    }
+  }
 }
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 .App {
-    display: flex;
-    padding-left: 240px;
+  display: flex;
+  padding-left: 240px;
 
-    .dark-bg {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: black;
-        opacity: 80%;
-        z-index: 999999;
-    }
+  .dark-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: 80%;
+    z-index: 999999;
+  }
 }
 
 /* SIDBAR / NAVIGATION STYLING */
 .sidebar {
-    background-color: $main-blue;
-    color: #fff;
-    padding: 40px 45px;
-    width: 235px;
-    height: 100vh;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 99999;
+  background-color: $main-blue;
+  color: #fff;
+  padding: 40px 45px;
+  width: 235px;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99999;
 
-    .settings {
-        li:hover:not(#log-btn) {
-            @include nav-hover();
-        }
-
-        #log-btn:hover {
-            button {
-            background-color: rgb(236, 236, 236);
-            }
-        }
+  .settings {
+    li:hover:not(#log-btn) {
+      @include nav-hover();
     }
-    
-    ul {
+
+    #log-btn:hover {
+      button {
+        background-color: rgb(236, 236, 236);
+      }
+    }
+  }
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 40px;
+
+    li {
+      display: flex;
+      margin-bottom: 32px;
+      cursor: pointer;
+      position: relative;
+      z-index: 9;
+
+      a {
+        text-decoration: none;
+        color: #fff;
         display: flex;
-        flex-direction: column;
-        margin-bottom: 40px;
 
-        li {
-           display: flex;
-           margin-bottom: 32px;
-           cursor: pointer;
-           position: relative;
-           z-index: 9;
-           
-           a {
-            text-decoration: none;
-            color: #fff;
-            display: flex;
-
-            &:hover {
-                @include nav-hover();
-            }
-           }
-
-           h3 {
-            font-size: 15px;
-            font-weight: 400;
-            margin-left: 15px;
-            }
-
-            #icon {
-                margin-top: 2.5px;
-            }
-
-            button {
-                @include main-btn();
-
-                h3 {
-                    font-family: 'Poppins', sans-serif;
-                    font-weight: 500;
-                    font-size: 14px;
-                }
-
-                #icon {
-                    margin: 4.4px -8px 0 0;
-                }
-            }
-
+        &:hover {
+          @include nav-hover();
         }
+      }
+
+      #active {
+        @include nav-hover();
+      }
+
+      h3 {
+        font-size: 15px;
+        font-weight: 400;
+        margin-left: 15px;
+      }
+
+      #icon {
+        margin-top: 2.5px;
+      }
+
+      button {
+        @include main-btn();
+
+        h3 {
+          font-family: "Poppins", sans-serif;
+          font-weight: 500;
+          font-size: 14px;
+        }
+
+        #icon {
+          margin: 4.4px -8px 0 0;
+        }
+      }
     }
+  }
 }
 
 .section-title {
-    font-weight: 500;
-    margin-bottom: 7px;
+  font-weight: 500;
+  margin-bottom: 7px;
 }
 
 /* OVERVIEW */
 .overview {
-    padding: 60px 35px;
-    width: 100%;
+  padding: 60px 35px;
+  width: 100%;
 
-    h1 {
-        font-weight: 600;
-        font-size: 25px;
-        margin-bottom: 50px;
+  h1 {
+    font-weight: 600;
+    font-size: 25px;
+    margin-bottom: 50px;
+  }
+
+  .accounts-container {
+    .all-accounts {
+      display: flex;
+      flex-wrap: wrap;
     }
+    .new-account {
+      border: 1.4px solid #c4c4c4;
+      color: #535353;
+      text-align: center;
+      margin-right: 20px;
+      margin-bottom: 20px;
 
-    .accounts-container {
-        
-        .all-accounts {
-            display: flex;
-            flex-wrap: wrap;
+      width: 270px;
+      height: 210px;
+      position: relative;
+
+      padding: 28px;
+
+      .depositAmount {
+        font-weight: 600;
+        color: $main-blue;
+        font-size: 35px;
+        margin-top: -30px;
+
+        position: absolute;
+        bottom: 40px;
+        width: 100%;
+        left: 0;
+      }
+
+      h3 {
+        font-weight: 400;
+        margin-bottom: 30px;
+      }
+      #add-icon {
+        font-size: 80px;
+        color: #c4c4c4;
+        cursor: pointer;
+        transition: 0.3s ease-in-out;
+
+        &:hover {
+          transform: scale(1.1);
+          color: #535353;
         }
-        .new-account {
-            border: 1.4px solid #C4C4C4;
-            color: #535353;
-            text-align: center;
-            margin-right: 20px;
-            margin-bottom: 20px;
-
-            width: 270px;
-            height: 210px;
-            position: relative;
-
-            padding: 28px;
-
-            .depositAmount {
-                font-weight: 600;
-                color: $main-blue;
-                font-size: 35px;
-                margin-top: -30px;
-
-                position: absolute;
-                bottom: 40px;
-                width: 100%;
-                left: 0;
-            }
-            
-            h3 {
-                font-weight: 400;
-                margin-bottom: 30px;
-            }
-            #add-icon {
-                font-size: 80px;
-                color: #C4C4C4;
-                cursor: pointer;
-                transition: 0.3s ease-in-out;
-
-                &:hover {
-                    transform: scale(1.1);
-                    color: #535353;
-                }
-            }
-        }
-    }   
+      }
+    }
+  }
 }
 
 hr {
-    margin: 50px 0 50px 0;
-    width: 100%;
+  margin: 50px 0 50px 0;
+  width: 100%;
 }
 
 .transactions {
-    .filters {
-        display: flex;
-        font-size: 14px;
-        margin-top: 15px;
+  .filters {
+    display: flex;
+    font-size: 14px;
+    margin-top: 15px;
 
-        h3 {
-            margin-right: 10px;
-            font-weight: 500;
-            text-transform: uppercase;
-        }
+    h3 {
+      margin-right: 10px;
+      font-weight: 500;
+      text-transform: uppercase;
     }
+  }
 }
 
 /* NEW ACCOUNT FORM STYLING */
 .newAccount {
-    background-color: #fff;
-    padding: 30px;
+  background-color: #fff;
+  padding: 30px;
 
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    
-    width: 400px;
-    height: 300px;
-    z-index: 999;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 
-    box-shadow: 10px 10px 29px 0px rgba(0,0,0,0.24);
+  width: 400px;
+  height: 300px;
+  z-index: 999;
 
-    .account-input {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        margin-top: 20px;
+  box-shadow: 10px 10px 29px 0px rgba(0, 0, 0, 0.24);
 
-        @include bank-form();
-        padding-bottom: 0px;
-        
-        h4 {
-            top: 110px;
-            left: 102px;
+  .account-input {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
 
-            &:last-child {
-                color: red;
-            }
-        }
+    @include bank-form();
+    padding-bottom: 0px;
+
+    h4 {
+      top: 110px;
+      left: 102px;
+
+      &:last-child {
+        color: red;
+      }
     }
+  }
 
-    button {
-        @include main-btn;
-        background-color: $main-blue;
-        color: #fff;
-        font-size: 15px;
-        width: 200px;
-        display: flex;
-        margin: 0 auto;
-        justify-content: center;
-        margin-top: 20px;
+  button {
+    @include main-btn;
+    background-color: $main-blue;
+    color: #fff;
+    font-size: 15px;
+    width: 200px;
+    display: flex;
+    margin: 0 auto;
+    justify-content: center;
+    margin-top: 20px;
 
-        &:hover {
-            background-color: $hover-blue;
-        }
+    &:hover {
+      background-color: $hover-blue;
     }
+  }
 
-    #close-btn {
-        font-size: 25px;
-        
-        position: absolute;
-        top: 20px;
-        right: 20px;
+  #close-btn {
+    font-size: 25px;
 
-        cursor: pointer;
-    }
+    position: absolute;
+    top: 20px;
+    right: 20px;
+
+    cursor: pointer;
+  }
 }
 
 /* TRANSACTIONS PAGE STYLING */
 
 .transactions-page {
-    padding: 60px 35px;
-    width: 100%;
+  padding: 60px 35px;
+  width: 100%;
 
-    form {
-        @include bank-form;
+  form {
+    @include bank-form;
 
-        .dropdown-accounts {
-            @include customDropdown;
-        }
-
-        .select-account {
-            @include customSelect;
-        }
-        
+    .dropdown-accounts {
+      @include customDropdown;
     }
+
+    .select-account {
+      @include customSelect;
+    }
+  }
 }
 
 /* TRANSACTION TABLE STYLING */
 .transaction-table {
-    
-    .table-titles {
-        color: #fff;
-        background-color: $main-blue;
-        font-weight: 500;
-    }
+  .table-titles {
+    color: #fff;
+    background-color: $main-blue;
+    font-weight: 500;
+  }
 
-    table {
+  table {
     position: relative;
     margin-top: 20px;
     border-collapse: collapse;
     width: 100%;
     height: 100%;
-    
-    box-shadow: 10px 10px 29px 0px rgba(0,0,0,0.15);
 
-        td {
-            padding: 15px 35px;
-        }
-        #table-content  {
-            td {
-                padding: 30px 35px;
-            }
+    box-shadow: 10px 10px 29px 0px rgba(0, 0, 0, 0.15);
 
-            td:last-child {
-                font-weight: 600;
-            }
-        }
-        #transaction-type {
-            span {
-            color: $main-blue;
-            background-color: #2367b531;
-            font-size: 12px;
-            font-weight: 600;
-            padding: 7px 15px;
-            border-radius: 20px;
-            }
-        }
+    td {
+      padding: 15px 35px;
+    }
+    #table-content {
+      td {
+        padding: 30px 35px;
+        position: relative;
+      }
+
+      td:last-child {
+        font-weight: 600;
+      }
     }
 
-    .filters {
-        .filter-dropdown {
-            position: relative;
-            padding-bottom: 7px;
-        .select-filter {
-            @include customSelect;
-            width: 120px;
-            color: #fff;
-            background-color: $main-blue;
-            border-radius: 5px;
-
-            #down-arrow {
-                top: 3.5px;
-            }
-
-            h3 {
-                border: none;
-            }
-        }
-        .filter-dropdown-select {
-            @include customDropdown;
-            top: 30px;
-        }
-        }
+    span {
+      font-size: 13px;
+      font-weight: 600;
+      display: flex;
+      justify-content: center;
+      border-radius: 12px;
+      padding: 3px;
+      width: 100px;
     }
+
+    #type-transaction {
+      span {
+        color: $main-blue;
+        background-color: #2367b531;
+      }
+    }
+
+    #type-transfer-debit {
+      span {
+        color: #d0021b;
+        background-color: #d0021a4d;
+      }
+    }
+
+    #type-transfer-credit {
+      span {
+        color: #0a9707;
+        background-color: #09970745;
+      }
+    }
+  }
+
+  .filters {
+    .filter-dropdown {
+      position: relative;
+      padding-bottom: 7px;
+      .select-filter {
+        @include customSelect;
+        width: 150px;
+        color: #fff;
+        background-color: $main-blue;
+        border-radius: 5px;
+
+        #down-arrow {
+          top: 3.5px;
+        }
+
+        h3 {
+          border: none;
+        }
+      }
+      .filter-dropdown-select {
+        @include customDropdown;
+        top: 30px;
+      }
+    }
+  }
 }
 
 /* CARDS PAGE STYLING */
 .cards {
-    padding: 60px 35px;
-    width: 100%;
+  padding: 60px 35px;
+  width: 100%;
 
-    .new-card {
-        margin-bottom: 50px;
+  .new-card {
+    margin-bottom: 50px;
 
-        form {
-            @include bank-form;
+    form {
+      @include bank-form;
 
-            .select-card-type, .debit-or-credit, .connect-account {
-                @include customSelect;
-            }
+      .select-card-type,
+      .debit-or-credit,
+      .connect-account {
+        @include customSelect;
+      }
 
-            .dropdown-card-types {
-                @include customDropdown;
-            }
-        }
+      .dropdown-card-types {
+        @include customDropdown;
+      }
     }
+  }
 
-    .card-list {
-        margin-top: 25px;;
+  .card-list {
+    margin-top: 25px;
 
-        .card-container {
-            display: flex;
-            flex-wrap: wrap;
+    .card-container {
+      display: flex;
+      flex-wrap: wrap;
 
-        .card {
-            margin: 0 18px 18px 0;
-            width: 280px;
-            height: 160px;
-            position: relative;
-            padding: 15px;
-            display: flex;
-            // background-color: rgb(255, 255, 127);
-            font-family: 'Averia Serif Libre', cursive;
-            box-shadow: 10px 10px 29px 0px rgba(0,0,0,0.15);
-            background-image: url('./img/glass.png');
-            background-size: cover;
+      .card {
+        margin: 0 18px 18px 0;
+        width: 280px;
+        height: 160px;
+        position: relative;
+        padding: 15px;
+        display: flex;
+        // background-color: rgb(255, 255, 127);
+        font-family: "Averia Serif Libre", cursive;
+        box-shadow: 10px 10px 29px 0px rgba(0, 0, 0, 0.15);
+        background-image: url("./img/glass.png");
+        background-size: cover;
 
-            @keyframes deleteAnim {
-                0% {
-                    transform: scale(0);
-                }
-                100% {
-                    transform: scale(100%);
-                }
-            }
-
-            .delete-card {
-                position: absolute;
-                top: 10px;
-                right: 10px;
-                font-size: 25px;
-                color: $main-blue;
-                cursor: pointer;
-                animation: deleteAnim 0.5s ease-in-out;
-            }
-
-            .left {
-                .credentials {
-                    position: absolute;
-                    bottom: 10px;
-
-                    h5 {
-                        font-weight: 500;
-                        font-size: 16px;
-                    }
-                    h6 {
-                        text-transform: uppercase;
-                        font-size: 9px;
-                    }
-                }
-
-                .type {
-                    h2 {
-                        font-weight: 500;
-                        font-family: 'Poppins', sans-serif;
-                    }
-                }
-            }
-
-            .right {
-                #card-type {
-                    position: absolute;
-                    bottom: 10px;
-                    right: 15px;
-
-                    color: $main-blue;
-                    font-size: 35px;
-                }
-            }
+        @keyframes deleteAnim {
+          0% {
+            transform: scale(0);
+          }
+          100% {
+            transform: scale(100%);
+          }
         }
+
+        .delete-card {
+          position: absolute;
+          top: 10px;
+          right: 10px;
+          font-size: 25px;
+          color: $main-blue;
+          cursor: pointer;
+          animation: deleteAnim 0.5s ease-in-out;
         }
+
+        .left {
+          .credentials {
+            position: absolute;
+            bottom: 10px;
+
+            h5 {
+              font-weight: 500;
+              font-size: 16px;
+            }
+            h6 {
+              text-transform: uppercase;
+              font-size: 9px;
+            }
+          }
+
+          .type {
+            h2 {
+              font-weight: 500;
+              font-family: "Poppins", sans-serif;
+            }
+          }
+        }
+
+        .right {
+          #card-type {
+            position: absolute;
+            bottom: 10px;
+            right: 15px;
+
+            color: $main-blue;
+            font-size: 35px;
+          }
+        }
+      }
     }
+  }
 }
 
 /* CARD TRANSFER STYLING */
 
 .transfers {
-    padding: 60px 35px;
-    width: 100%;
+  padding: 60px 35px;
+  width: 100%;
 
-    form {
-        @include bank-form;
-            .select-card {
-                @include customSelect;
-            }
-
-            .dropdown-accounts {
-                @include customDropdown;
-            }
+  form {
+    @include bank-form;
+    .select-card {
+      @include customSelect;
     }
+
+    .dropdown-accounts {
+      @include customDropdown;
+    }
+  }
 }

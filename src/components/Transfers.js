@@ -3,6 +3,8 @@ import { BiDownArrow } from "react-icons/bi";
 import { useSelector, useDispatch } from 'react-redux/es/exports';
 import { subtract } from '../actions/AccountActions';
 import { subtractFromCard, accumulateDebt } from '../actions/CardActions';
+import { transfer } from '../actions/TransactionActions';
+import TransactionTable from './TransactionTable';
 
 function Transfers() {
 
@@ -16,7 +18,8 @@ function Transfers() {
     const[selectedCard, setSelectedCard] = useState({
         name: 'Select Card',
         number: 0,
-        type: ''
+        type: '',
+        currentDeposit: 0
     });
 
     const[confirmation, setConfirmation] = useState('');
@@ -30,8 +33,12 @@ function Transfers() {
             if (selectedCard.type === 'Debit') { // DEBIT
                 dispatch(subtractFromCard(selectedCard.number, amount));
                 dispatch(subtract(selectedCard.name, amount));
+                dispatch(transfer(selectedCard.name, recepient, amount, 3, selectedCard.currentDeposit - amount, selectedCard.type));
             } 
-            else dispatch(accumulateDebt(selectedCard.number, amount));
+            else {
+                dispatch(accumulateDebt(selectedCard.number, amount));
+                dispatch(transfer(selectedCard.name, recepient, amount, 3, selectedCard.currentDeposit + amount, selectedCard.type));
+            }
 
             // clear errors and stuff
             setError('');
@@ -40,7 +47,8 @@ function Transfers() {
             setSelectedCard({
                 name: 'Select Card',
                 number: 0,
-                type: ''
+                type: '',
+                currentDeposit: 0
             });
             setConfirmation('Transfer completed');
 
@@ -70,7 +78,8 @@ function Transfers() {
                             <h3 key={card.number} onClick={() => {setSelectedCard({
                                 name: card.cardType === 'Debit' ? card.accountName : `...${String(card.number).slice(12)}, CREDIT CARD`,
                                 number: card.number,
-                                type: card.cardType
+                                type: card.cardType,
+                                currentDeposit: card.cardType === 'Debit' ? card.accountDeposit : card.debt
                             }); setVisible(false)}}>{ card.cardType + ', ' + String(card.number).slice(12) }</h3>
                 ))}</div> : '' }
             </div>
@@ -88,7 +97,14 @@ function Transfers() {
             <button>Send</button>
             <h4>{ error }</h4>
             <h4 className='confirmation'>{ confirmation }</h4>
-        </form>      
+        </form>
+
+        <hr />
+
+        <div className="transactions">
+            <h3 className='section-title'>Transactions</h3>
+            <TransactionTable />
+        </div> 
     </div>
   )
 }

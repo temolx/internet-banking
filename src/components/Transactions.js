@@ -4,11 +4,13 @@ import { useSelector, useDispatch } from 'react-redux/es/exports';
 import { transfer } from '../actions/TransactionActions';
 import { subtract } from '../actions/AccountActions';
 import TransactionTable from './TransactionTable';
+import { subtractFromCard } from '../actions/CardActions';
 
 function Transactions() {
 
     const dispatch = useDispatch();
     const accounts = useSelector(state => state.accounts);
+    const cards = useSelector(state => state.cards);
 
     const[visible, setVisible] = useState(false);
     const[selectedAccount, setSelectedAccount] = useState('Select Account');
@@ -26,10 +28,16 @@ function Transactions() {
         e.preventDefault();
 
         if (selectedAccount !== 'Select Account' && recepient !== '' && amount !== null) {
-                dispatch(transfer(selectedAccount, recepient, amount, 5, currentDeposit - amount, "Transaction")); // add date
+                dispatch(transfer(selectedAccount, recepient, amount, 5, currentDeposit - amount, 'Transaction')); // add date
                 
                 // subtracting from selected account
                 dispatch(subtract(selectedAccount, Number(amount)));
+                // subtract from a card connected to this account (if exists)
+                cards.map((card) => {
+                    if (card.accountName === selectedAccount) {
+                        dispatch(subtractFromCard(card.number, Number(amount)));
+                    }
+                })
 
                 setError({
                     digitCheck: '',

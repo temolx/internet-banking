@@ -1,24 +1,30 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { BiDownArrow } from "react-icons/bi";
 import { useSelector } from 'react-redux/es/exports'
+import { useLocation } from 'react-router-dom';
 
 function TransactionTable() {
 
+    const location = useLocation();
+
     const transactions = useSelector(state => state.transactions);
-    const accounts = useSelector(state => state.accounts);
 
     const[visible, setVisible] = useState(false);
     const[filter, setFilter] = useState('All')
+
+    useEffect(() => {
+        if (location.pathname === '/transactions') {
+            setFilter('Transaction');
+        }
+        if (location.pathname === '/transfers') {
+            setFilter('Transfer');
+        }
+    }, [])
 
   return (
     <div className='transaction-table'>
         <div className="filters">
             <h3>Filter By</h3>
-
-                {/* <option value="debit">Debit</option>
-                <option value="credit">Credit</option>
-                <option value="transfer">Transfer</option>   */}
-
 
             <div className="filter-dropdown" onMouseEnter={() => setVisible(true)} onMouseLeave={() => setVisible(false)}>   
                 <div className="select-filter">
@@ -31,6 +37,7 @@ function TransactionTable() {
                     <h3 onClick={() => {setFilter('Debit'); setVisible(false)}}>Debit</h3>
                     <h3 onClick={() => {setFilter('Credit'); setVisible(false)}}>Credit</h3>
                     <h3 onClick={() => {setFilter('Transfer'); setVisible(false)}}>Transfer</h3>
+                    <h3 onClick={() => {setFilter('Transaction'); setVisible(false)}}>Transaction</h3>
                 </div> : '' }
             </div>
             </div>
@@ -44,9 +51,19 @@ function TransactionTable() {
                 <td>Balance</td>
             </tr>
 
-            {transactions && transactions.map((transaction) => (
+            {transactions && transactions.filter((el) => {
+                if (el.type === filter) {
+                    return el;
+                }
+                else if (filter === 'Transfer') {
+                    return el.type === 'Debit' || el.type === 'Credit'
+                }
+                else if (filter === 'All') {
+                    return el;
+                }
+            }).map((transaction) => (
                 <tr id="table-content">
-                    <td id="transaction-type"><span>{ transaction.type }</span></td>
+                    <td id={transaction.type === 'Transaction' ? 'type-transaction' : (transaction.type === 'Debit' ? 'type-transfer-debit' : 'type-transfer-credit')}><span>{ transaction.type }</span><div id='transBG'></div></td>
                     <td>{ transaction.date }</td>
                     <td>{ transaction.recepient }</td>
                     <td>${ transaction.amount }</td>

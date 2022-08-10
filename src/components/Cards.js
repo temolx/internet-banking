@@ -5,6 +5,7 @@ import { AiFillCloseCircle } from "react-icons/ai";
 import { CardColors } from './CardColors';
 import { useDispatch, useSelector } from 'react-redux/es/exports';
 import { AddCard, AddCreditCard, RemoveCard } from '../actions/CardActions';
+import glass from '../img/glass.png'
 
 function Cards() {
 
@@ -36,10 +37,9 @@ function Cards() {
     const[confirmation, setConfirmation] = useState('');
 
     const colorBackgrounds = [
-        'rgba(104, 180, 255, 0.742)',
-        'rgba(255, 46, 46, 0.85)',
-        'rgba(56, 255, 46, 0.758)',
-        'rgb(255, 255, 127)',
+        'linear-gradient(to right, #00BD99, #006EC4)', // blue
+        'linear-gradient(to right, #6041BC, #BE1A4C)', // pink 
+        'linear-gradient(to right, #000000, #2B2A2A)', // black
     ]
 
     const handleDelete = (cardNumber) => {
@@ -188,15 +188,17 @@ function Cards() {
 
         <div className="card-container">
         {cards && cards.map((card, index) => (
-            <div className="card" style={{ backgroundColor: colorBackgrounds[card.color] }} onMouseEnter={() => setDeleteVisible(index)} onMouseLeave={() => setDeleteVisible(null)}>
+            <div className='card-list-container' onMouseEnter={() => setDeleteVisible(index)} onMouseLeave={() => setDeleteVisible(null)}>
+            <img className='glassOverlay' src={glass} />
+            <div className="card" style={{ background: colorBackgrounds[card.color] }}>
                 {deleteVisible === index ? <AiFillCloseCircle className="delete-card" onClick={() => handleDelete(card.number)} /> : ''}
                 <div className="left">
                     <div className="type">
-                        <h2>{ card.cardType } Card</h2>
+                        <h2>{ card.cardType }</h2>
                     </div>
 
                     <div className="credentials">
-                        <h5>{ card.number }</h5>
+                        <h5>{ String(card.number).slice(0, 4) }<span>-</span>{ String(card.number).slice(4, 8) }<span>-</span>{ String(card.number).slice(8, 12) }<span>-</span>{ String(card.number).slice(12, 16) }</h5>
                         <h6>Valid Thru</h6>
                         <h5>{ card.expirationDate }</h5>
                         <h5>Lee M. Cardholder</h5>
@@ -207,6 +209,7 @@ function Cards() {
                     {card.type === "Visa" ? <FaCcVisa id="card-type" /> :
                     <FaCcMastercard id="card-type" />}
                 </div>
+            </div>
             </div>
         ))}
         </div>

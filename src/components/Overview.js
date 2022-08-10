@@ -16,7 +16,10 @@ function Overview() {
 
   return (
     <div className='overview'>
-        {formVisible ? <NewAccount setFormVisible={setFormVisible} /> : ''}
+        {formVisible ? <div>
+            <NewAccount setFormVisible={setFormVisible} />
+            <div className="dark-bg"></div>
+        </div> : ''}
 
         <div className="general">
             <h1>Good Morning, Jasmine</h1>
@@ -26,13 +29,13 @@ function Overview() {
 
                 <div className="all-accounts">
                     {accounts && accounts.map((account) => (
-                        <div className="accounts new-account">
+                        <div className="accounts">
                             <h1> {account.name} Account </h1>
                             <h2 className='depositAmount'>${ account.deposit }</h2>
                         </div>
                     ))}
                     
-                <div className="new-account">
+                <div className="accounts new-account">
                     <h3>Add New Account</h3>
                     <RiAddCircleLine id="add-icon" onClick={addNewAccount} />
                 </div>

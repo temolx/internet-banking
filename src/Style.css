@@ -1,5 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:wght@300;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;1,100;1,200;1,300;1,400;1,500&display=swap");
 /* VARIABLES */
 /* MIXINS */
 * {
@@ -10,21 +10,12 @@
 
 body {
   font-family: "Poppins", sans-serif;
+  background-color: #fafbfd;
 }
 
 .App {
   display: flex;
   padding-left: 240px;
-}
-.App .dark-bg {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: black;
-  opacity: 80%;
-  z-index: 999999;
 }
 
 /* SIDBAR / NAVIGATION STYLING */
@@ -195,6 +186,16 @@ body {
   padding: 60px 35px;
   width: 100%;
 }
+.overview .dark-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: black;
+  opacity: 80%;
+  z-index: 9;
+}
 .overview h1 {
   font-weight: 600;
   font-size: 25px;
@@ -204,18 +205,20 @@ body {
   display: flex;
   flex-wrap: wrap;
 }
-.overview .accounts-container .new-account {
-  border: 1.4px solid #c4c4c4;
+.overview .accounts-container .accounts {
+  background-color: #fff;
   color: #535353;
   text-align: center;
   margin-right: 20px;
   margin-bottom: 20px;
-  width: 270px;
-  height: 210px;
+  width: 320px;
+  height: 195px;
   position: relative;
   padding: 28px;
+  border-radius: 5px;
+  box-shadow: 10px 10px 4px -8px rgba(0, 0, 0, 0.22);
 }
-.overview .accounts-container .new-account .depositAmount {
+.overview .accounts-container .accounts .depositAmount {
   font-weight: 600;
   color: #2366b5;
   font-size: 35px;
@@ -225,9 +228,14 @@ body {
   width: 100%;
   left: 0;
 }
+.overview .accounts-container .new-account {
+  border: 1.8px solid #c4c4c4;
+  background-color: #fafbfd;
+  box-shadow: none;
+}
 .overview .accounts-container .new-account h3 {
   font-weight: 400;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 .overview .accounts-container .new-account #add-icon {
   font-size: 80px;
@@ -260,6 +268,7 @@ hr {
 .newAccount {
   background-color: #fff;
   padding: 30px;
+  border-radius: 5px;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -687,18 +696,38 @@ hr {
 .cards .card-list .card-container {
   display: flex;
   flex-wrap: wrap;
+  color: #fff;
 }
-.cards .card-list .card-container .card {
-  margin: 0 18px 18px 0;
+.cards .card-list .card-container .card-list-container {
+  position: relative;
   width: 280px;
   height: 160px;
+  border-radius: 15px;
+  margin: 0 28px 18px 0;
+  filter: drop-shadow(0px 0px 3px #2366b5);
+  transition: 0.3s ease-in-out;
+  cursor: pointer;
+}
+.cards .card-list .card-container .card-list-container:hover {
+  filter: drop-shadow(0px 0px 10px #2366b5);
+}
+.cards .card-list .card-container .glassOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9;
+}
+.cards .card-list .card-container .card {
+  width: 280px;
+  height: 160px;
+  border-radius: 15px;
   position: relative;
   padding: 15px;
   display: flex;
-  font-family: "Averia Serif Libre", cursive;
+  font-family: "IBM Plex Mono", monospace;
   box-shadow: 10px 10px 29px 0px rgba(0, 0, 0, 0.15);
-  background-image: url("./img/glass.png");
-  background-size: cover;
 }
 @-webkit-keyframes deleteAnim {
   0% {
@@ -720,19 +749,26 @@ hr {
   position: absolute;
   top: 10px;
   right: 10px;
-  font-size: 25px;
-  color: #2366b5;
+  font-size: 22px;
+  z-index: 9;
+  opacity: 0.9;
   cursor: pointer;
   -webkit-animation: deleteAnim 0.5s ease-in-out;
           animation: deleteAnim 0.5s ease-in-out;
+}
+.cards .card-list .card-container .card .left {
+  opacity: 0.9;
 }
 .cards .card-list .card-container .card .left .credentials {
   position: absolute;
   bottom: 10px;
 }
 .cards .card-list .card-container .card .left .credentials h5 {
-  font-weight: 500;
+  font-weight: 400;
   font-size: 16px;
+}
+.cards .card-list .card-container .card .left .credentials h5 span {
+  margin: 5px;
 }
 .cards .card-list .card-container .card .left .credentials h6 {
   text-transform: uppercase;
@@ -741,13 +777,15 @@ hr {
 .cards .card-list .card-container .card .left .type h2 {
   font-weight: 500;
   font-family: "Poppins", sans-serif;
+  font-size: 20px;
 }
 .cards .card-list .card-container .card .right #card-type {
   position: absolute;
   bottom: 10px;
   right: 15px;
-  color: #2366b5;
+  color: black;
   font-size: 35px;
+  color: #fff;
 }
 
 /* CARD TRANSFER STYLING */

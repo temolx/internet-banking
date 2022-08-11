@@ -479,6 +479,9 @@ hr {
   background-color: #2366b5;
   font-weight: 500;
 }
+.transaction-table .activePage {
+  background-color: green;
+}
 .transaction-table table {
   position: relative;
   margin-top: 20px;

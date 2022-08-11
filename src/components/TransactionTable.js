@@ -1,3 +1,4 @@
+import { current } from '@reduxjs/toolkit';
 import React, { useState, useEffect } from 'react'
 import { BiDownArrow } from "react-icons/bi";
 import { useSelector } from 'react-redux/es/exports'
@@ -12,6 +13,13 @@ function TransactionTable() {
     const[visible, setVisible] = useState(false);
     const[filter, setFilter] = useState('All')
 
+    const[page, setPage] = useState(1);
+    const[pageFilters, setPageFilters] = useState({
+        firstEl: 0,
+        lastEl: 5,
+        pageList: [page, page + 1, page + 2, page + 3]
+    });
+
     useEffect(() => {
         if (location.pathname === '/transactions') {
             setFilter('Transaction');
@@ -19,7 +27,32 @@ function TransactionTable() {
         if (location.pathname === '/transfers') {
             setFilter('Transfer');
         }
-    }, [])
+
+        setPageFilters({
+            firstEl: 5 * page - 5,
+            lastEl: 5 * page,
+            pageList: page === pageFilters.pageList[3] ? [page, page + 1, page + 2, page + 3] : pageFilters.pageList
+        })
+    }, [page])
+
+    const handlePage = (currentPage) => {
+        setPage(currentPage);
+    }
+
+    const handlePrev = () => {
+        if (page !== 1) {
+            setPage(page - 1);
+
+            setPageFilters({
+                ...pageFilters,
+                pageList: page === pageFilters.pageList[0] ? [page, page - 1, page - 2, page - 3] : pageFilters.pageList
+            })
+        }
+    }
+
+    const handleNext = () => {
+        setPage(page + 1);
+    }
 
   return (
     <div className='transaction-table'>
@@ -51,7 +84,7 @@ function TransactionTable() {
                 <td>Balance</td>
             </tr>
 
-            {transactions && transactions.filter((el) => {
+            {transactions && transactions.filter((el, index) => {
                 if (el.type === filter) {
                     return el;
                 }
@@ -61,6 +94,8 @@ function TransactionTable() {
                 else if (filter === 'All') {
                     return el;
                 }
+            }).filter((el, index) => {
+                return index >= pageFilters.firstEl && index < pageFilters.lastEl;
             }).map((transaction) => (
                 <tr id="table-content">
                     <td id={transaction.type === 'Transaction' ? 'type-transaction' : (transaction.type === 'Debit' ? 'type-transfer-debit' : 'type-transfer-credit')}><span>{ transaction.type }</span><div id='transBG'></div></td>
@@ -71,6 +106,14 @@ function TransactionTable() {
                 </tr>
             ))}
         </table>
+
+        <div className="pageNav">
+            <button onClick={() => handlePrev()}>Prev</button>
+            {pageFilters.pageList.map((currentPage, i) => (
+                <button key={i} onClick={() => handlePage(currentPage)} className={currentPage === page ? 'activePage' : ''}>{ currentPage }</button>
+            ))}
+            <button onClick={() => handleNext()}>Next</button>
+        </div>
     </div>
   )
 }

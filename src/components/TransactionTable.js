@@ -20,6 +20,18 @@ function TransactionTable() {
         pageList: [page, page + 1, page + 2, page + 3]
     });
 
+    let filteredTransactions = transactions.filter((el, index) => {
+        if (el.type === filter) {
+            return el;
+        }
+        else if (filter === 'Transfer') {
+            return el.type === 'Debit' || el.type === 'Credit'
+        }
+        else if (filter === 'All') {
+            return el;
+        }
+    });
+
     useEffect(() => {
         if (location.pathname === '/transactions') {
             setFilter('Transaction');
@@ -45,13 +57,15 @@ function TransactionTable() {
 
             setPageFilters({
                 ...pageFilters,
-                pageList: page === pageFilters.pageList[0] ? [page, page - 1, page - 2, page - 3] : pageFilters.pageList
+                pageList: page === pageFilters.pageList[0] ? [page - 3, page - 2, page - 1, page] : pageFilters.pageList
             })
         }
     }
 
     const handleNext = () => {
-        setPage(page + 1);
+        if (filteredTransactions.length > 5 * page) {
+            setPage(page + 1);
+        }
     }
 
   return (
@@ -84,17 +98,7 @@ function TransactionTable() {
                 <td>Balance</td>
             </tr>
 
-            {transactions && transactions.filter((el, index) => {
-                if (el.type === filter) {
-                    return el;
-                }
-                else if (filter === 'Transfer') {
-                    return el.type === 'Debit' || el.type === 'Credit'
-                }
-                else if (filter === 'All') {
-                    return el;
-                }
-            }).filter((el, index) => {
+            {transactions && filteredTransactions.filter((el, index) => {
                 return index >= pageFilters.firstEl && index < pageFilters.lastEl;
             }).map((transaction) => (
                 <tr id="table-content">

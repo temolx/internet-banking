@@ -252,21 +252,21 @@ body {
   margin-bottom: 7px;
 }
 
+.dark-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: black;
+  opacity: 80%;
+  z-index: 9;
+}
+
 /* OVERVIEW */
 .overview {
   padding: 60px 35px;
   width: 100%;
-
-  .dark-bg {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: black;
-    opacity: 80%;
-    z-index: 9;
-  }
 
   h1 {
     font-weight: 600;
@@ -440,10 +440,7 @@ hr {
     color: #fff;
     background-color: $main-blue;
     font-weight: 500;
-  }
-
-  .activePage {
-    background-color: green;
+    // height: 51px;
   }
 
   table {
@@ -451,16 +448,23 @@ hr {
     margin-top: 20px;
     border-collapse: collapse;
     width: 100%;
-    height: 100%;
+    height: 490px;
+    table-layout: fixed;
 
     box-shadow: 10px 10px 29px 0px rgba(0, 0, 0, 0.15);
+
+    tr {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    }
 
     td {
       padding: 15px 35px;
     }
     #table-content {
+      padding: 15px 2px;
+
       td {
-        padding: 30px 35px;
         position: relative;
       }
 
@@ -524,6 +528,38 @@ hr {
         @include customDropdown;
         top: 30px;
       }
+    }
+  }
+
+  .pageNav {
+    margin-top: 20px;
+
+    button {
+      width: 45px;
+      height: 26px;
+      margin-right: 5px;
+      border: 1px solid #aba1a1;
+      border-radius: 5px;
+      font-weight: 600;
+      color: #000;
+      background: #fff;
+      cursor: pointer;
+    }
+
+    .page-btn {
+      width: 28px;
+      height: 26px;
+    }
+
+    .activePage {
+      color: #fff;
+      background-color: $main-blue;
+      border: 1px solid $main-blue;
+    }
+
+    .page-inactive {
+      color: #aba1a1;
+      background-color: #e4e4e4;
     }
   }
 }
@@ -607,7 +643,7 @@ hr {
           top: 10px;
           right: 10px;
           font-size: 22px;
-          z-index: 9;
+          z-index: 999999;
           opacity: 0.9;
           cursor: pointer;
           animation: deleteAnim 0.5s ease-in-out;
@@ -673,6 +709,136 @@ hr {
 
     .dropdown-accounts {
       @include customDropdown;
+    }
+  }
+}
+
+/* ADDITIONAL CARD INFO STYLING */
+
+@keyframes cardInfoAnim-horizontal {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+@keyframes cardInfoAnim-vertical {
+  0% {
+    height: 0;
+  }
+  100% {
+    height: 100%;
+  }
+}
+
+@keyframes cardTextAnim {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 100%;
+  }
+}
+
+.cardInfo {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9;
+
+  color: #fff;
+  padding: 60px 70px 23px 70px;
+
+  // top
+  &:before {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 1.5px;
+    top: 0;
+    right: 0;
+    background-color: #fff;
+    animation: cardInfoAnim-horizontal 1s ease-in-out;
+    animation-delay: 3s;
+    animation-fill-mode: forwards;
+  }
+
+  // bottom
+  &:after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 1.5px;
+    bottom: 0;
+    left: 0;
+    background-color: #fff;
+    animation: cardInfoAnim-horizontal 1s ease-in-out;
+    animation-delay: 1s;
+    animation-fill-mode: forwards;
+  }
+
+  // right
+  .some:before {
+    content: "";
+    position: absolute;
+    width: 1.5px;
+    height: 0;
+    bottom: 0;
+    right: 0;
+    background-color: #fff;
+    animation: cardInfoAnim-vertical 1s ease-in-out;
+    animation-delay: 2s;
+    animation-fill-mode: forwards;
+  }
+
+  // left
+  .some:after {
+    content: "";
+    position: absolute;
+    width: 1.5px;
+    height: 0;
+    top: 0;
+    left: 0;
+    background-color: #fff;
+    animation: cardInfoAnim-vertical 1s ease-in-out;
+    animation-delay: 0s;
+    animation-fill-mode: forwards;
+  }
+
+  h2 {
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 15px;
+
+    display: flex;
+    justify-content: space-between;
+
+    animation: cardTextAnim 0.5s ease-in-out;
+  }
+
+  span {
+    font-weight: 700;
+    margin-right: 40px;
+  }
+
+  button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 22px;
+    cursor: pointer;
+    transition: 0.3s ease-in-out;
+
+    background: none;
+    border: none;
+    color: #fff;
+    animation: cardTextAnim 0.5s ease-in-out;
+
+    &:hover {
+      transform: scale(1.2);
     }
   }
 }

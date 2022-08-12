@@ -6,6 +6,7 @@ import { CardColors } from './CardColors';
 import { useDispatch, useSelector } from 'react-redux/es/exports';
 import { AddCard, AddCreditCard, RemoveCard } from '../actions/CardActions';
 import glass from '../img/glass.png'
+import CardInfo from './CardInfo';
 
 function Cards() {
 
@@ -17,6 +18,9 @@ function Cards() {
     const[colorsVisible, setColorsVisible] = useState(false);
     const[typesVisible, setTypesVisible] = useState(false);
     const[accountsVisible, setAccountsVisible] = useState(false);
+
+    const[infoVisible, setInfoVisible] = useState(false);
+    const[selectedCard, setSelectedCard] = useState('');
 
     const[deleteVisible, setDeleteVisible] = useState(null);
 
@@ -101,9 +105,19 @@ function Cards() {
         }
     }
 
+    const showHistory = (card) => {
+        setInfoVisible(true);
+        setSelectedCard(card);
+    }
+
 
   return (
     <div className='cards'>
+        {infoVisible ? <div>
+            <div className="dark-bg"></div>
+            <CardInfo card={selectedCard} setInfoVisible={setInfoVisible} />
+        </div> : '' }
+
         <h3 className='section-title'>Add A Card</h3>
 
         <div className="new-card">
@@ -190,7 +204,7 @@ function Cards() {
         {cards && cards.map((card, index) => (
             <div className='card-list-container' onMouseEnter={() => setDeleteVisible(index)} onMouseLeave={() => setDeleteVisible(null)}>
             <img className='glassOverlay' src={glass} />
-            <div className="card" style={{ background: colorBackgrounds[card.color] }}>
+            <div className="card" style={{ background: colorBackgrounds[card.color] }} onClick={() => showHistory(card)}>
                 {deleteVisible === index ? <AiFillCloseCircle className="delete-card" onClick={() => handleDelete(card.number)} /> : ''}
                 <div className="left">
                     <div className="type">

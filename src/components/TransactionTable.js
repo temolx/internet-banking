@@ -19,6 +19,13 @@ function TransactionTable() {
         lastEl: 5,
         pageList: [page, page + 1, page + 2, page + 3]
     });
+    // const[inactive, setInactive] = useState({
+    //     prev: true,
+    //     next: true
+    // });
+
+    const[inactivePrev, setInactivePrev] = useState(true);
+    const[inactiveNext, setInactiveNext] = useState(true);
 
     let filteredTransactions = transactions.filter((el, index) => {
         if (el.type === filter) {
@@ -39,16 +46,27 @@ function TransactionTable() {
         if (location.pathname === '/transfers') {
             setFilter('Transfer');
         }
+    }, [])
 
+    useEffect(() => {
         setPageFilters({
             firstEl: 5 * page - 5,
             lastEl: 5 * page,
             pageList: page === pageFilters.pageList[3] ? [page, page + 1, page + 2, page + 3] : pageFilters.pageList
         })
+
+        if (page !== 1) setInactivePrev(false);
+        else setInactivePrev(true);
+
+        if (filteredTransactions.length < 5 * (page)) setInactiveNext(true);
+        else setInactiveNext(false);
+
     }, [page])
 
     const handlePage = (currentPage) => {
-        setPage(currentPage);
+        if (filteredTransactions.length > 5 * (currentPage - 1)) {
+            setPage(currentPage);
+        }
     }
 
     const handlePrev = () => {
@@ -80,11 +98,11 @@ function TransactionTable() {
                 </div>
 
                 {visible ? <div className='filter-dropdown-select'>
-                    <h3 onClick={() => {setFilter('All'); setVisible(false)}}>All</h3>
-                    <h3 onClick={() => {setFilter('Debit'); setVisible(false)}}>Debit</h3>
-                    <h3 onClick={() => {setFilter('Credit'); setVisible(false)}}>Credit</h3>
-                    <h3 onClick={() => {setFilter('Transfer'); setVisible(false)}}>Transfer</h3>
-                    <h3 onClick={() => {setFilter('Transaction'); setVisible(false)}}>Transaction</h3>
+                    <h3 onClick={() => {setFilter('All'); setVisible(false); setPage(1)}}>All</h3>
+                    <h3 onClick={() => {setFilter('Debit'); setVisible(false); setPage(1)}}>Debit</h3>
+                    <h3 onClick={() => {setFilter('Credit'); setVisible(false); setPage(1)}}>Credit</h3>
+                    <h3 onClick={() => {setFilter('Transfer'); setVisible(false); setPage(1)}}>Transfer</h3>
+                    <h3 onClick={() => {setFilter('Transaction'); setVisible(false); setPage(1)}}>Transaction</h3>
                 </div> : '' }
             </div>
             </div>
@@ -112,11 +130,11 @@ function TransactionTable() {
         </table>
 
         <div className="pageNav">
-            <button onClick={() => handlePrev()}>Prev</button>
+            <button onClick={() => handlePrev()} className={inactivePrev ? 'page-inactive' : ''}>Prev</button>
             {pageFilters.pageList.map((currentPage, i) => (
-                <button key={i} onClick={() => handlePage(currentPage)} className={currentPage === page ? 'activePage' : ''}>{ currentPage }</button>
+                <button key={i} onClick={() => handlePage(currentPage)} className={currentPage === page ? 'activePage page-btn' : 'page-btn'}>{ currentPage }</button>
             ))}
-            <button onClick={() => handleNext()}>Next</button>
+            <button onClick={() => handleNext()} className={inactiveNext ? 'page-inactive' : ''}>Next</button>
         </div>
     </div>
   )

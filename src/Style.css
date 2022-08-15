@@ -1071,4 +1071,31 @@ hr {
 }
 .cardInfo button:hover {
   transform: scale(1.2);
+}
+
+/* EMPTY STYLING */
+.empty {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 150px;
+  margin-bottom: 100px;
+}
+.empty h2 {
+  font-size: 17px;
+  font-weight: 500;
+}
+.empty .empty-box {
+  font-size: 55px;
+  margin-bottom: 12px;
+  color: #2366b5;
+}
+
+#dropdown-empty {
+  color: #2366b5;
+  cursor: not-allowed;
+}
+#dropdown-empty:hover {
+  transform: none;
 }/*# sourceMappingURL=Style.css.map */

@@ -1,6 +1,6 @@
-import { current } from '@reduxjs/toolkit';
 import React, { useState, useEffect } from 'react'
 import { BiDownArrow } from "react-icons/bi";
+import { GrDropbox } from "react-icons/gr";
 import { useSelector } from 'react-redux/es/exports'
 import { useLocation } from 'react-router-dom';
 
@@ -86,6 +86,7 @@ function TransactionTable() {
         }
     }
 
+if (transactions.length !== 0) {
   return (
     <div className='transaction-table'>
         <div className="filters">
@@ -135,9 +136,19 @@ function TransactionTable() {
                 <button key={i} onClick={() => handlePage(currentPage)} className={currentPage === page ? 'activePage page-btn' : 'page-btn'}>{ currentPage }</button>
             ))}
             <button onClick={() => handleNext()} className={inactiveNext ? 'page-inactive' : ''}>Next</button>
-        </div>
+        </div> 
     </div>
   )
 }
+else {
+    return(
+        <div className='empty'>
+            <GrDropbox className='empty-box' />
+            <h2>No transactions yet...</h2>
+        </div>
+    )
+}
+}
+
 
 export default TransactionTable

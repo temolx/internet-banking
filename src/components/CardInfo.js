@@ -5,7 +5,7 @@ function CardInfo({ card, setInfoVisible }) {
   return (
     <div className='cardInfo'>
         <h2><span>Card type:</span> { card.type }</h2>
-        <h2><span>Color:</span> { card.color }</h2>
+        <h2><span>Color:</span> { card.color === 0 ? 'Blue' : (card.color === 1 ? 'Red' : 'Black') }</h2>
         <h2><span>Card Number:</span> { card.number }</h2>
         <h2><span>Expiration Date:</span> { card.expirationDate }</h2>
         <h2><span>Credit / Debit:</span> { card.cardType }</h2>

@@ -31,11 +31,17 @@ function Transfers() {
         if (amount !== null && recepient !== '' && selectedCard.name !== 'Select Card') {
             // dispatch
             if (selectedCard.type === 'Debit') { // DEBIT
-                dispatch(subtractFromCard(selectedCard.number, amount));
-                dispatch(subtract(selectedCard.name, amount));
-                dispatch(transfer(selectedCard.name, recepient, amount, 3, selectedCard.currentDeposit - amount, selectedCard.type));
+                if (selectedCard.currentDeposit > amount) {
+                    dispatch(subtractFromCard(selectedCard.number, amount));
+                    dispatch(subtract(selectedCard.name, amount));
+                    dispatch(transfer(selectedCard.name, recepient, amount, 3, selectedCard.currentDeposit - amount, selectedCard.type));
+                }
+                else {
+                    setError('Insufficient funds.');
+                    return;
+                }
             } 
-            else {
+            else { // CREDIT
                 dispatch(accumulateDebt(selectedCard.number, amount));
                 dispatch(transfer(selectedCard.name, recepient, amount, 3, selectedCard.currentDeposit + amount, selectedCard.type));
             }
@@ -73,7 +79,7 @@ function Transfers() {
                     <BiDownArrow id="down-arrow" style={!visible ? { transform: 'rotate(180deg)' } : { transform: 'rotate(0deg)' }} />
                 </div>
 
-                { visible ? <div className="dropdown-accounts">
+                { cards.length === 0 && visible ? <div className="dropdown-accounts"><h3 id="dropdown-empty">Add a card first</h3></div> : ( visible ? <div className="dropdown-accounts">
                         {cards && cards.map((card) => (
                             <h3 key={card.number} onClick={() => {setSelectedCard({
                                 name: card.cardType === 'Debit' ? card.accountName : `...${String(card.number).slice(12)}, CREDIT CARD`,
@@ -81,7 +87,7 @@ function Transfers() {
                                 type: card.cardType,
                                 currentDeposit: card.cardType === 'Debit' ? card.accountDeposit : card.debt
                             }); setVisible(false)}}>{ card.cardType + ', ' + String(card.number).slice(12) }</h3>
-                ))}</div> : '' }
+                ))}</div> : '' ) }
             </div>
 
             <div className="user-input">

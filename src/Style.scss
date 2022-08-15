@@ -842,3 +842,32 @@ hr {
     }
   }
 }
+
+/* EMPTY STYLING */
+.empty {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 150px;
+  margin-bottom: 100px;
+
+  h2 {
+    font-size: 17px;
+    font-weight: 500;
+  }
+  .empty-box {
+    font-size: 55px;
+    margin-bottom: 12px;
+    color: $main-blue;
+  }
+}
+
+#dropdown-empty {
+  color: $main-blue;
+  cursor: not-allowed;
+
+  &:hover {
+    transform: none;
+  }
+}

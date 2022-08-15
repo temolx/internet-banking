@@ -17,17 +17,14 @@ function Transactions() {
     const[recepient, setRecepient] = useState('');
     const[amount, setAmount] = useState(null);
     const[currentDeposit, setCurrentDeposit] = useState(0);
-    const[error, setError] = useState({
-        digitCheck: '',
-        empty: ''
-    });
+    const[error, setError] = useState('');
     const[confirmation, setConfirmation] = useState('');
 
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        if (selectedAccount !== 'Select Account' && recepient !== '' && amount !== null) {
+        if (selectedAccount !== 'Select Account' && recepient !== '' && amount !== null && currentDeposit >= amount) {
                 dispatch(transfer(selectedAccount, recepient, amount, 5, currentDeposit - amount, 'Transaction')); // add date
                 
                 // subtracting from selected account
@@ -39,10 +36,7 @@ function Transactions() {
                     }
                 })
 
-                setError({
-                    digitCheck: '',
-                    empty: ''
-                });
+                setError('');
                 setSelectedAccount('Select Account');
                 setAmount('');
                 setRecepient('');
@@ -53,10 +47,12 @@ function Transactions() {
                 }, 1500)
         }
         else {
-            setError({
-                digitCheck: '',
-                empty: 'Please fill in the required fields.'
-            });
+            if (currentDeposit < amount) {
+                setError('Insufficient funds.');
+            }
+            else {
+                setError('Please fill in the required fields.');
+            }
             setConfirmation('');
         }
     }
@@ -73,11 +69,11 @@ function Transactions() {
                         <BiDownArrow id="down-arrow" style={!visible ? { transform: 'rotate(180deg)' } : { transform: 'rotate(0deg)' }} />
                     </div>
 
-                    {visible ? <div className="dropdown-accounts">
+                    {accounts.length === 0 && visible ? <div className="dropdown-accounts"><h3 id="dropdown-empty">Add an account first</h3></div> : (visible ? <div className="dropdown-accounts">
                         {accounts && accounts.map((account) => (
                             <h3 key={account.name} onClick={() => {setSelectedAccount(account.name); setCurrentDeposit(account.deposit); setVisible(false)}}>{ account.name }, ${ account.deposit }</h3>
                         ))}
-                    </div> : ''}
+                    </div> : '')}
                 </div>
 
                 <div className="user-input">
@@ -91,8 +87,7 @@ function Transactions() {
                 </div>
 
                 <button>Transfer</button>
-                <h4>{ error.digitCheck }</h4>
-                <h4>{ error.empty }</h4>
+                <h4>{ error }</h4>
                 <h4 className='confirmation'>{ confirmation }</h4>
             </form>
         </div>

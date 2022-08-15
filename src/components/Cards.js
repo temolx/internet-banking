@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { FaCcVisa, FaCcMastercard, FaWindowClose } from "react-icons/fa";
 import { BiDownArrow } from "react-icons/bi";
 import { AiFillCloseCircle } from "react-icons/ai";
+import { GrDropbox } from "react-icons/gr";
 import { CardColors } from './CardColors';
 import { useDispatch, useSelector } from 'react-redux/es/exports';
 import { AddCard, AddCreditCard, RemoveCard } from '../actions/CardActions';
@@ -179,14 +180,15 @@ function Cards() {
                         <BiDownArrow id="down-arrow" style={!accountsVisible ? { transform: 'rotate(180deg)' } : { transform: 'rotate(0deg)' }} />
                     </div>
 
-                    {accountsVisible ? <div className="dropdown-card-types">
+                    {accounts.length === 0 && accountsVisible ? <div className="dropdown-card-types"><h3 id="dropdown-empty">Add an account first</h3></div> : (accountsVisible ? <div className="dropdown-card-types">
                         {accounts.map((account) => (
                             <h3 onClick={() => {setSelectedAccount({
                                 name: account.name,
                                 deposit: account.deposit
                             }); setAccountsVisible(false)}}>{ account.name }, ${ account.deposit }</h3>
                         ))}
-                    </div> : ''}
+                    </div> : '')}
+
                 </div> : '' }
 
                 <button>Add Card</button>
@@ -197,15 +199,15 @@ function Cards() {
 
         <hr />
 
-        <div className="card-list">
         <h3 className='section-title'>Cards</h3>
 
+        {cards.length !== 0 ? <div className="card-list">
         <div className="card-container">
         {cards && cards.map((card, index) => (
             <div className='card-list-container' onMouseEnter={() => setDeleteVisible(index)} onMouseLeave={() => setDeleteVisible(null)}>
-            <img className='glassOverlay' src={glass} />
-            <div className="card" style={{ background: colorBackgrounds[card.color] }} onClick={() => showHistory(card)}>
-                {deleteVisible === index ? <AiFillCloseCircle className="delete-card" onClick={() => handleDelete(card.number)} /> : ''}
+            <img className='glassOverlay' src={glass} onClick={() => showHistory(card)} />
+            <div className="card" style={{ background: colorBackgrounds[card.color] }}>
+            {deleteVisible === index ? <AiFillCloseCircle className="delete-card" onClick={() => handleDelete(card.number)} /> : ''}
                 <div className="left">
                     <div className="type">
                         <h2>{ card.cardType }</h2>
@@ -224,10 +226,15 @@ function Cards() {
                     <FaCcMastercard id="card-type" />}
                 </div>
             </div>
+
             </div>
         ))}
         </div>
-        </div>
+        </div> : 
+        <div className='empty'>
+            <GrDropbox className='empty-box' />
+            <h2>No cards yet...</h2>
+        </div>}
         
     </div>
   )

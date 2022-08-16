@@ -8,12 +8,16 @@ import { Provider } from 'react-redux';
 import AccountReducer from './reducers/AccountReducer';
 import TransactionReducer from './reducers/TransactionReducer';
 import CardReducer from './reducers/CardReducer';
+import ProfileReducers from './reducers/ProfileReducers';
+import ProfileInfoReducer from './reducers/ProfileInfoReducer';
 
 const store = configureStore({
   reducer: {
     accounts: AccountReducer,
     transactions: TransactionReducer,
-    cards: CardReducer
+    cards: CardReducer,
+    profileImg: ProfileReducers,
+    profileInfo: ProfileInfoReducer
   }
 })
 

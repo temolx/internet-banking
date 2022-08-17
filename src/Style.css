@@ -30,7 +30,7 @@ body {
   left: 0;
   z-index: 99999;
 }
-.sidebar .settings li:hover:not(#log-btn) {
+.sidebar .settings li:hover:not(#log-btn, #profile-btn) {
   color: #2366b5;
 }
 @-webkit-keyframes navLineAnim {
@@ -49,7 +49,7 @@ body {
     opacity: 100%;
   }
 }
-.sidebar .settings li:hover:not(#log-btn)::before {
+.sidebar .settings li:hover:not(#log-btn, #profile-btn)::before {
   position: absolute;
   content: "";
   background-color: #fff;
@@ -59,7 +59,7 @@ body {
   top: -8px;
   z-index: -9;
 }
-.sidebar .settings li:hover:not(#log-btn)::after {
+.sidebar .settings li:hover:not(#log-btn, #profile-btn)::after {
   position: absolute;
   content: "";
   background-color: rgb(29, 190, 29);
@@ -1177,4 +1177,7 @@ hr {
 .profile-settings form .user-input {
   position: relative;
   padding-bottom: 20px;
+}
+.profile-settings .profile-input input {
+  padding: 14px 10px;
 }/*# sourceMappingURL=Style.css.map */

@@ -73,7 +73,7 @@ function ProfileSettings() {
                 <input type="text" name='surname' />
             </div>
 
-            <div className="user-input">
+            <div className="user-input profile-input">
                 <label htmlFor="photo">Profile Picture:</label>
                 <input type="file" name='photo' onChange={(e) => setImage(e.target.files[0])} />
             </div>

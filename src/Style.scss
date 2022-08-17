@@ -183,7 +183,7 @@ body {
   z-index: 99999;
 
   .settings {
-    li:hover:not(#log-btn) {
+    li:hover:not(#log-btn, #profile-btn) {
       @include nav-hover();
     }
 
@@ -905,5 +905,11 @@ hr {
 
   form {
     @include bank-form;
+  }
+
+  .profile-input {
+    input {
+      padding: 14px 10px;
+    }
   }
 }

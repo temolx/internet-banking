@@ -26,7 +26,7 @@ function Sidebar() {
 
         <ul className='settings'>
             <li><FiSettings id="icon" /><h3>Settings</h3></li>
-            <li><Link to='/profile' id={location.pathname === '/profile' ? 'active' : ''}><CgProfile id="icon" /><h3>Profile</h3></Link></li>
+            <li id="profile-btn"><Link to='/profile' id={location.pathname === '/profile' ? 'active' : ''}><CgProfile id="icon" /><h3>Profile</h3></Link></li>
             <li id="log-btn"><button><BiLogOut id="icon" /><h3>Log Out</h3></button></li>
         </ul>
     </div>

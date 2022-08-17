@@ -19,10 +19,6 @@ function TransactionTable() {
         lastEl: 5,
         pageList: [page, page + 1, page + 2, page + 3]
     });
-    // const[inactive, setInactive] = useState({
-    //     prev: true,
-    //     next: true
-    // });
 
     const[inactivePrev, setInactivePrev] = useState(true);
     const[inactiveNext, setInactiveNext] = useState(true);

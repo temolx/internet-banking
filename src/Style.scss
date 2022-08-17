@@ -659,6 +659,7 @@ hr {
             h5 {
               font-weight: 400;
               font-size: 16px;
+              text-transform: capitalize;
 
               span {
                 margin: 5px;
@@ -886,11 +887,14 @@ hr {
     font-weight: 400;
     font-size: 14px;
     margin-top: 15.5px;
+    text-transform: capitalize;
   }
 
   .profile-img {
     width: 49px;
     height: 50px;
+    cursor: pointer;
+
     img {
       width: 100%;
       height: 100%;
@@ -911,5 +915,61 @@ hr {
     input {
       padding: 14px 10px;
     }
+  }
+}
+
+/* GREETING PAGE STYLING */
+
+.greeting {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+
+  // background-color: pink;
+
+  h1 {
+    font-weight: 500;
+    font-size: 40px;
+    margin-bottom: 7px;
+    text-transform: capitalize;
+  }
+
+  form {
+    @include bank-form();
+
+    input {
+      margin-bottom: 4px;
+    }
+
+    a {
+      text-decoration: none;
+
+      button {
+        text-transform: uppercase;
+      }
+    }
+
+    h4 {
+      &:last-of-type {
+        color: red;
+      }
+    }
+  }
+
+  video {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
   }
 }

@@ -1,16 +1,17 @@
 import React, { useState } from 'react'
 import axios from 'axios';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { AddPicture, AddInfo } from '../actions/ProfileActions';
 
 function ProfileSettings() {
 
     const dispatch = useDispatch();
+    const profileInfo = useSelector(state => state.profileInfo);
 
     const[image, setImage] = useState('');
     const[info, setInfo] = useState({
-        first: '',
-        last: ''
+        first: profileInfo.first,
+        last: profileInfo.last
     })
     const[error, setError] = useState('');
     const[success, setSuccess] = useState('');
@@ -30,6 +31,7 @@ function ProfileSettings() {
                     console.log(res.data);
                     dispatch(AddPicture(res.data.secure_url));
                 });
+        }
 
             if (info.first !== '' && info.last !== '') {
                 // dispatch
@@ -48,8 +50,6 @@ function ProfileSettings() {
             setTimeout(() => {
                 setSuccess('');
             }, 1500)
-        }
-        else setError('Please fill in the required fields.');
     }
 
   return (
@@ -62,7 +62,7 @@ function ProfileSettings() {
                 first: e.target.value
             })}>
                 <label htmlFor="name">First Name:</label>
-                <input type="text" name='name' />
+                <input type="text" name='name' defaultValue={profileInfo.first} />
             </div>
 
             <div className="user-input" onChange={(e) => setInfo({
@@ -70,7 +70,7 @@ function ProfileSettings() {
                 last: e.target.value
             })}>
                 <label htmlFor="surname">Last Name:</label>
-                <input type="text" name='surname' />
+                <input type="text" name='surname' defaultValue={profileInfo.last} />
             </div>
 
             <div className="user-input profile-input">

@@ -14,6 +14,7 @@ function Cards() {
     const dispatch = useDispatch();
     const cards = useSelector(state => state.cards);
     const accounts = useSelector(state => state.accounts);
+    const profileInfo = useSelector(state => state.profileInfo);
 
     const[visible, setVisible] = useState(false);
     const[colorsVisible, setColorsVisible] = useState(false);
@@ -217,7 +218,7 @@ function Cards() {
                         <h5>{ String(card.number).slice(0, 4) }<span>-</span>{ String(card.number).slice(4, 8) }<span>-</span>{ String(card.number).slice(8, 12) }<span>-</span>{ String(card.number).slice(12, 16) }</h5>
                         <h6>Valid Thru</h6>
                         <h5>{ card.expirationDate }</h5>
-                        <h5>Lee M. Cardholder</h5>
+                        {profileInfo.first !== '' ? <h5>{ profileInfo.first }'s Card</h5> : <h5>Cardholder</h5>}
                     </div>
                 </div>
 

@@ -11,3 +11,10 @@ export const AddInfo = (data) => { // receiving object containing first name and
         payload: data
     }
 }
+
+export const AddName = (name) => { // receiving name only
+    return {
+        type: 'ADD_NAME',
+        payload: name
+    }
+}

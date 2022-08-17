@@ -7,6 +7,7 @@ import TransactionTable from './TransactionTable';
 function Overview() {
 
     const accounts = useSelector(state => state.accounts);
+    const profileInfo = useSelector(state => state.profileInfo);
 
     const[formVisible, setFormVisible] = useState(false);
 
@@ -22,7 +23,7 @@ function Overview() {
         </div> : ''}
 
         <div className="general">
-            <h1>Good Morning, Jasmine</h1>
+            {profileInfo.first === '' && profileInfo.last === '' ? <h1>Good Morning</h1> : <h1>Good Morning, { profileInfo.first }</h1>}
 
             <div className="accounts-container">
                 <h3 className='section-title'>Account Balance</h3>

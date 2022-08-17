@@ -801,6 +801,7 @@ hr {
 .cards .card-list .card-container .card .left .credentials h5 {
   font-weight: 400;
   font-size: 16px;
+  text-transform: capitalize;
 }
 .cards .card-list .card-container .card .left .credentials h5 span {
   margin: 5px;
@@ -1112,10 +1113,12 @@ hr {
   font-weight: 400;
   font-size: 14px;
   margin-top: 15.5px;
+  text-transform: capitalize;
 }
 .profile .profile-img {
   width: 49px;
   height: 50px;
+  cursor: pointer;
 }
 .profile .profile-img img {
   width: 100%;
@@ -1180,4 +1183,95 @@ hr {
 }
 .profile-settings .profile-input input {
   padding: 14px 10px;
+}
+
+/* GREETING PAGE STYLING */
+.greeting {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+.greeting h1 {
+  font-weight: 500;
+  font-size: 40px;
+  margin-bottom: 7px;
+  text-transform: capitalize;
+}
+.greeting form {
+  padding-bottom: 20px;
+}
+.greeting form label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+.greeting form input {
+  width: 200px;
+  padding: 5px 10px;
+  border-radius: 3px;
+  border: 1px solid black;
+}
+.greeting form h4 {
+  position: absolute;
+  font-weight: 400;
+  font-size: 12px;
+  color: red;
+}
+.greeting form h4:last-child {
+  color: green;
+}
+.greeting form button {
+  display: flex;
+  background-color: #fff;
+  color: #2366b5;
+  border: none;
+  border-radius: 30px;
+  padding: 5px 19px;
+  cursor: pointer;
+  font-family: "Poppins", sans-serif;
+  transition: 0.3s ease-in-out;
+  background-color: #2366b5;
+  color: #fff;
+  font-size: 16px;
+  width: 200px;
+  display: flex;
+  justify-content: center;
+  margin: 5px 0 5px 0;
+}
+.greeting form button:hover {
+  background-color: #5085bd;
+}
+.greeting form .user-input {
+  position: relative;
+  padding-bottom: 20px;
+}
+.greeting form input {
+  margin-bottom: 4px;
+}
+.greeting form a {
+  text-decoration: none;
+}
+.greeting form a button {
+  text-transform: uppercase;
+}
+.greeting form h4:last-of-type {
+  color: red;
+}
+.greeting video {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  z-index: -1;
 }/*# sourceMappingURL=Style.css.map */

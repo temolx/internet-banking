@@ -101,7 +101,7 @@ function Transfers() {
             </div>
 
             <button>Send</button>
-            <h4>{ error }</h4>
+            <h4 className='error'>{ error }</h4>
             <h4 className='confirmation'>{ confirmation }</h4>
         </form>
 

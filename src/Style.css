@@ -285,6 +285,7 @@ hr {
   justify-content: center;
   align-items: center;
   margin-top: 20px;
+  position: relative;
   padding-bottom: 20px;
   padding-bottom: 0px;
 }
@@ -303,6 +304,7 @@ hr {
 }
 .newAccount .account-input h4 {
   position: absolute;
+  bottom: 0;
   font-weight: 400;
   font-size: 12px;
   color: red;
@@ -336,8 +338,7 @@ hr {
   padding-bottom: 20px;
 }
 .newAccount .account-input h4 {
-  top: 110px;
-  left: 102px;
+  bottom: -155px;
 }
 .newAccount .account-input h4:last-child {
   color: red;
@@ -378,6 +379,7 @@ hr {
   width: 100%;
 }
 .transactions-page form {
+  position: relative;
   padding-bottom: 20px;
 }
 .transactions-page form label {
@@ -395,6 +397,7 @@ hr {
 }
 .transactions-page form h4 {
   position: absolute;
+  bottom: 0;
   font-weight: 400;
   font-size: 12px;
   color: red;
@@ -624,6 +627,7 @@ hr {
   margin-bottom: 50px;
 }
 .cards .new-card form {
+  position: relative;
   padding-bottom: 20px;
 }
 .cards .new-card form label {
@@ -641,6 +645,7 @@ hr {
 }
 .cards .new-card form h4 {
   position: absolute;
+  bottom: 0;
   font-weight: 400;
   font-size: 12px;
   color: red;
@@ -830,6 +835,7 @@ hr {
   width: 100%;
 }
 .transfers form {
+  position: relative;
   padding-bottom: 20px;
 }
 .transfers form label {
@@ -847,6 +853,7 @@ hr {
 }
 .transfers form h4 {
   position: absolute;
+  bottom: 0;
   font-weight: 400;
   font-size: 12px;
   color: red;
@@ -1132,6 +1139,7 @@ hr {
   padding: 60px 35px;
 }
 .profile-settings form {
+  position: relative;
   padding-bottom: 20px;
 }
 .profile-settings form label {
@@ -1149,6 +1157,7 @@ hr {
 }
 .profile-settings form h4 {
   position: absolute;
+  bottom: 0;
   font-weight: 400;
   font-size: 12px;
   color: red;
@@ -1206,6 +1215,7 @@ hr {
   text-transform: capitalize;
 }
 .greeting form {
+  position: relative;
   padding-bottom: 20px;
 }
 .greeting form label {
@@ -1223,6 +1233,7 @@ hr {
 }
 .greeting form h4 {
   position: absolute;
+  bottom: 0;
   font-weight: 400;
   font-size: 12px;
   color: red;
@@ -1274,4 +1285,37 @@ hr {
   -o-object-fit: cover;
      object-fit: cover;
   z-index: -1;
+}
+
+/* REPSONSIVE DESIGN */
+@media only screen and (max-width: 950px) {
+  .sidebar {
+    display: none;
+  }
+  .App {
+    padding-left: 0;
+    padding-top: 80px;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .profile-settings {
+    display: flex;
+    flex-direction: column;
+    margin: 90px auto;
+  }
+  .section-title,
+.general h1 {
+    text-align: center;
+    margin-bottom: 25px;
+  }
+  .card-container,
+.all-accounts {
+    justify-content: center;
+  }
+  .card-container {
+    margin: 0 0 18px 27px;
+  }
 }/*# sourceMappingURL=Style.css.map */

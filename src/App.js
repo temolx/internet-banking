@@ -8,13 +8,21 @@ import Transfers from './components/Transfers';
 import Profile from './components/Profile';
 import ProfileSettings from './components/ProfileSettings';
 import Greeting from './components/Greeting';
+import MobileMenu from './components/MobileMenu';
+import { FcMenu } from "react-icons/fc";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { useState } from 'react';
 
 function App() {
+
+  const[menuVisible, setMenuVisible] = useState(false);
+
   return (
     <Router>
       <div className="App">
+          <FcMenu className='burger-menu' onClick={() => setMenuVisible(!menuVisible)} />
           <Sidebar id="side" />
+          {menuVisible ? <MobileMenu setMenuVisible={setMenuVisible} menuVisible={menuVisible} /> : ''}
           <Profile />
 
         <Routes>

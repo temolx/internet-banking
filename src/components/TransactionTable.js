@@ -113,17 +113,19 @@ if (transactions.length !== 0) {
                 <td>Balance</td>
             </tr>
 
+            <div className='main-table-container'>
             {transactions && filteredTransactions.filter((el, index) => {
                 return index >= pageFilters.firstEl && index < pageFilters.lastEl;
             }).map((transaction) => (
                 <tr id="table-content">
-                    <td id={transaction.type === 'Transaction' ? 'type-transaction' : (transaction.type === 'Debit' ? 'type-transfer-debit' : 'type-transfer-credit')}><span>{ transaction.type }</span><div id='transBG'></div></td>
+                    <td id={transaction.type === 'Transaction' ? 'type-transaction' : (transaction.type === 'Debit' ? 'type-transfer-debit' : 'type-transfer-credit')} className="trans-type"><span>{ transaction.type }</span><div id='transBG'></div></td>
                     <td>{ transaction.date }</td>
                     <td>{ transaction.recepient }</td>
                     <td>${ transaction.amount }</td>
                     <td>${ transaction.after }</td>
                 </tr>
             ))}
+            </div>
         </table>
 
         <div className="pageNav">

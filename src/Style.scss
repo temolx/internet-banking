@@ -9,15 +9,6 @@ $hover-blue: #5085bd;
 @mixin nav-hover {
   color: $main-blue;
 
-  @keyframes navLineAnim {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 100%;
-    }
-  }
-
   &::before {
     position: absolute;
     content: "";
@@ -27,7 +18,6 @@ $hover-blue: #5085bd;
     left: -50px;
     top: -8px;
     z-index: -9;
-    // animation: navLineAnim 0.3s ease-in-out;
   }
   &::after {
     position: absolute;
@@ -183,6 +173,20 @@ body {
   top: 0;
   left: 0;
   z-index: 99999;
+
+  #close-icon {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    font-size: 30px;
+    cursor: pointer;
+
+    transition: 0.3s ease-in-out;
+
+    &:hover {
+      transform: scale(1.25);
+    }
+  }
 
   .settings {
     li:hover:not(#log-btn, #profile-btn) {
@@ -439,6 +443,7 @@ hr {
 
 /* TRANSACTION TABLE STYLING */
 .transaction-table {
+  // overflow-x: auto;
   .table-titles {
     color: #fff;
     background-color: $main-blue;
@@ -977,9 +982,53 @@ hr {
 
 /* REPSONSIVE DESIGN */
 
+.burger-menu {
+  position: absolute;
+  top: 43px;
+  left: 43px;
+  font-size: 36px;
+  cursor: pointer;
+
+  display: none;
+}
+
+.mobileMenu {
+  visibility: hidden;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: 0.3s ease-in-out;
+
+  background-color: #000000ec;
+
+  ul {
+    margin-top: 55px;
+    li {
+      margin-bottom: 50px;
+
+      a:hover,
+      &:hover,
+      #active {
+        &::before {
+          border-radius: 5px;
+        }
+      }
+    }
+  }
+}
+
 @media only screen and (max-width: 950px) {
-  .sidebar {
+  .mainSidebar {
     display: none;
+  }
+
+  .mobileMenu {
+    visibility: visible;
+  }
+
+  .burger-menu {
+    display: flex;
   }
 
   .App {
@@ -1012,5 +1061,36 @@ hr {
 
   .card-container {
     margin: 0 0 18px 27px;
+  }
+
+  .transaction-table {
+    table {
+      tr {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .main-table-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+      }
+
+      #table-content {
+        margin-bottom: 20px;
+        td {
+          &:last-child {
+            display: none;
+          }
+        }
+      }
+
+      .table-titles {
+        height: 35px;
+        td {
+          display: none;
+        }
+      }
+    }
   }
 }

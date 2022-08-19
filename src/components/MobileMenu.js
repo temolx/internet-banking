@@ -8,14 +8,14 @@ import { BiWallet, BiTransferAlt, BiCreditCard, BiLogOut } from "react-icons/bi"
 import { IoMdClose } from "react-icons/io";
 import { Link, useLocation } from 'react-router-dom';
 
-function Sidebar() {
+function MobileMenu({ setMenuVisible, menuVisible }) {
 
   const location = useLocation();
 
-  if (location.pathname !== '/') {
-    return (
-      <div className='sidebar mainSidebar'>
-          <ul className='navigation'>
+  return (
+    <div className='sidebar mobileMenu'>
+        <IoMdClose id="close-icon" onClick={() => setMenuVisible(false)} />
+          <ul className='navigation' onClick={() => setMenuVisible(false)} >
               <li><Link to='/main' id={location.pathname === '/main' ? 'active' : ''}><HiOutlineClipboardList id="icon" /><h3>Overview</h3></Link></li>
               <li><Link to='/main'><BiWallet id="icon" /><h3>Accounts</h3></Link></li>
               <li><Link to='/transfers' id={location.pathname === '/transfers' ? 'active' : ''}><BiTransferAlt id="icon" /><h3>Transfers</h3></Link></li>
@@ -24,14 +24,13 @@ function Sidebar() {
               <li><Link to='/transactions' id={location.pathname === '/transactions' ? 'active' : ''}><TbArrowsUpDown id="icon" /><h3>Transactions</h3></Link></li>
           </ul>
 
-          <ul className='settings'>
+          <ul className='settings' onClick={() => setMenuVisible(false)} >
               <li><FiSettings id="icon" /><h3>Settings</h3></li>
               <li id="profile-btn"><Link to='/profile' id={location.pathname === '/profile' ? 'active' : ''}><CgProfile id="icon" /><h3>Profile</h3></Link></li>
               <li id="log-btn"><button><BiLogOut id="icon" /><h3>Log Out</h3></button></li>
           </ul>
       </div>
-    )
-  }
+  )
 }
 
-export default Sidebar
+export default MobileMenu
